@@ -2735,6 +2735,7 @@ GameObject:
   - component: {fileID: 763056590}
   - component: {fileID: 763056589}
   - component: {fileID: 763056592}
+  - component: {fileID: 763056593}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2810,7 +2811,7 @@ Transform:
   m_GameObject: {fileID: 763056588}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.30799, y: 0.04000002, z: -7.9981403}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2860,6 +2861,22 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &763056593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763056588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d4fb5b445c19f4c85097a9bfc89de0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::cameraController
+  sens: 300
+  lockVertMin: -90
+  lockVertMax: 90
+  invertY: 0
 --- !u!1001 &768532424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6704,6 +6721,8 @@ GameObject:
   - component: {fileID: 1789898556}
   - component: {fileID: 1789898555}
   - component: {fileID: 1789898554}
+  - component: {fileID: 1789898559}
+  - component: {fileID: 1789898558}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -6799,13 +6818,64 @@ Transform:
   m_GameObject: {fileID: 1789898552}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.30799, y: 0.96, z: -2.00186}
+  m_LocalPosition: {x: 0, y: 2.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 763056591}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &1789898558
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789898552}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1789898559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789898552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6d216201398c2d448986df6591f2986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::playerController
+  controller: {fileID: 1789898558}
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  speed: 5
+  sprintMod: 4
+  jumpSpeed: 12
+  jumpMax: 2
+  gravity: 35
+  shootDamage: 1
+  shootRate: 0.25
+  shootDist: 15
+  gravityRush: 0
+  gravityFall: 0
 --- !u!1001 &1792079434
 PrefabInstance:
   m_ObjectHideFlags: 0

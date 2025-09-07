@@ -28,6 +28,11 @@ public class playerController : MonoBehaviour
     bool isFlyingActive = false;
     [SerializeField] float gravityRush;
     [SerializeField] float gravityFall;
+    [SerializeField] float verticalSmoothTime;
+    [SerializeField] float horizontalSmoothTime = 0.1f;
+    private float verticalVelocitySmooth;
+    [SerializeField] float smoothY ;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -39,52 +44,16 @@ public class playerController : MonoBehaviour
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
         movement();
-        sprint();
+        
     }
     void movement()
     {
         shootTimer += Time.deltaTime;
-        if (controller.isGrounded)
-        {
-            jumpCount = 0;
-            playerVel = Vector3.zero;
-        }
-        else
-        {
-            // Jump Button
-            if (isFlyingActive && Input.GetButton("Jump") && playerVel.y < 0)
-            {
-                playerVel.y += gravity * gravityFall * Time.deltaTime;
-            }
-            else
-            playerVel.y -= gravity * Time.deltaTime;
-        }
-            
-        moveDir = (Input.GetAxis("Horizontal") * transform.right) +
-               (Input.GetAxis("Vertical") * transform.forward);
 
-        controller.Move(moveDir * speed * Time.deltaTime);
+        //movedir
+        moveDir = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
 
-        jump();
-
-        controller.Move(playerVel * Time.deltaTime);
-
-        if (Input.GetButton("Fire1") && shootTimer >= shootRate)
-        {
-            shoot();
-        }
-    }
-    void jump()
-    {
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
-        {
-            //increment jump count
-            jumpCount++;
-            playerVel.y = jumpSpeed;
-        }
-    }
-    void sprint()
-    {
+        //Sprint
         if (Input.GetButtonDown("Sprint"))
         {
             speed *= sprintMod;
@@ -95,6 +64,33 @@ public class playerController : MonoBehaviour
             speed /= sprintMod;
             isSprinting = false;
         }
+
+        //Flying
+        if (!isFlyingActive)
+        {
+            if (controller.isGrounded && playerVel.y < 0)
+                playerVel.y = -2f;
+
+            if (Input.GetButtonDown("Jump") && controller.isGrounded)
+                playerVel.y = jumpSpeed;
+
+            playerVel.y -= gravity * Time.deltaTime;
+        }
+        else
+        {
+            float targetY = Input.GetButton("Jump") ? jumpSpeed * gravityRush : 0f;
+            playerVel.y = Mathf.Lerp(playerVel.y, targetY, smoothY * Time.deltaTime);
+            controller.Move((moveDir * speed + playerVel) * Time.deltaTime);
+        }
+
+        
+
+        //Move
+        controller.Move((moveDir * speed + playerVel) * Time.deltaTime);
+
+        //Shooting
+        if (Input.GetButton("Fire1") && shootTimer >= shootRate)
+            shoot();
     }
     void shoot()
     {
@@ -111,5 +107,16 @@ public class playerController : MonoBehaviour
                 dmg.takeDamage(shootDamage);
             }*/
         }
+    }
+    public void StartFlying()
+    {
+        isFlyingActive = true;
+        jumpCount = 0;
+        playerVel.y = jumpSpeed * gravityRush;
+    }
+
+    public void StopFlying()
+    {
+        isFlyingActive = false;
     }
 }
