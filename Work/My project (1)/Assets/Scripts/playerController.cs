@@ -23,6 +23,11 @@ public class playerController : MonoBehaviour
     int jumpCount;
 
     bool isSprinting;
+
+    //Flying mechanics
+    bool isFlyingActive = false;
+    [SerializeField] float gravityRush;
+    [SerializeField] float gravityFall;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,7 +50,16 @@ public class playerController : MonoBehaviour
             playerVel = Vector3.zero;
         }
         else
+        {
+            // Jump Button
+            if (isFlyingActive && Input.GetButton("Jump") && playerVel.y < 0)
+            {
+                playerVel.y += gravity * gravityFall * Time.deltaTime;
+            }
+            else
             playerVel.y -= gravity * Time.deltaTime;
+        }
+            
         moveDir = (Input.GetAxis("Horizontal") * transform.right) +
                (Input.GetAxis("Vertical") * transform.forward);
 
