@@ -50,6 +50,13 @@ public class Damage : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void SetSpeed(int newSpeed) // allow enemy to set bullet speed
+    {
+        speed = newSpeed;
+
+        if (type == damageType.moving && rb != null)
+            rb.linearVelocity = transform.forward * speed;
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.isTrigger)
