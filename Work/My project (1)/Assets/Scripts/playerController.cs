@@ -98,14 +98,14 @@ public class playerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
-/*            Debug.Log(hit.collider.name);
+            Debug.Log(hit.collider.name);
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
             if (dmg != null)
             {
                 dmg.takeDamage(shootDamage);
-            }*/
+            }
         }
     }
     public void StartFlying()
