@@ -99,8 +99,8 @@ public class chasingFlyingEnemyAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             Destroy(gameObject);
-            /*gameManager.instance.updateGameGoal(-1);*/
-           
+            gameManager.instance.updateGameGoal(-1);
+
         }
     }
 
