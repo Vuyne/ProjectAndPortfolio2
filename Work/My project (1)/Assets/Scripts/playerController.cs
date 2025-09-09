@@ -91,7 +91,7 @@ public class playerController : MonoBehaviour
             playerVel.y = -2f;
 
         //Flying
-        if (!isFlyingActive)
+        if (isFlyingActive == true)
         {
             if (controller.isGrounded && playerVel.y < 0)
                 playerVel.y = 0;
@@ -201,4 +201,9 @@ public class playerController : MonoBehaviour
             wallRunTimer = 0;
         }
     }
+
+    //void Attack()
+    //{
+
+    //}
 }
