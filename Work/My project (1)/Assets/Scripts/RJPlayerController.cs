@@ -1,4 +1,6 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using System.Collections;
 
 public class RJPlayerController : MonoBehaviour
 {
@@ -9,11 +11,15 @@ public class RJPlayerController : MonoBehaviour
     [SerializeField] int jumpSpeed;
     [SerializeField] int jumpMax;
     [SerializeField] int gravity;
+    [SerializeField] int HP;
+
 
     AudioSource footsteps;
     Vector3 playerVel;
     Vector3 moveDir;
     bool isSprinting;
+    bool isMoving;
+    float noiseLevel;
     int jumpCount;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +32,7 @@ public class RJPlayerController : MonoBehaviour
     {
         movement();
         sprinting();
+        noiseUpdate();
     }
     void movement()
     {
@@ -42,7 +49,14 @@ public class RJPlayerController : MonoBehaviour
         controller.Move(moveDir * speed * Time.deltaTime);
         jump();
         controller.Move(playerVel * Time.deltaTime);
-
+        if (moveDir == Vector3.zero)
+        {
+            isMoving = false;
+        }
+        else
+        {
+            isMoving = true;
+        }
     }
    void sprinting()
     {
@@ -67,6 +81,21 @@ public class RJPlayerController : MonoBehaviour
         {
             jumpCount++;
             playerVel.y = jumpSpeed;
+        }
+    }
+    void noiseUpdate()
+    {
+        if (isMoving == true && isSprinting == false)
+        {
+            noiseLevel += Time.deltaTime;
+        }
+        else if (isSprinting == true)
+        {
+            noiseLevel += Time.deltaTime * 2;
+        }
+        else if (noiseLevel > 0 && isMoving == false && isSprinting == false)
+        {
+            noiseLevel -= Time.deltaTime;
         }
     }
 }
