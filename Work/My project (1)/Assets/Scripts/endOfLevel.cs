@@ -10,4 +10,12 @@ public class EndofLevelTrigger : MonoBehaviour
             gameManager.instance.PlayerReachedEnd();
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+           
+            gameManager.instance.PlayerLeftEnd();
+        }
+    }
 }
