@@ -17,6 +17,7 @@ public class gameManager : MonoBehaviour
     public bool isPaused;
 
     int gameGoalCount;
+    bool playerAtEnd;
 
     float timeScaleOrig;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -67,9 +68,29 @@ public class gameManager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         gameGoalCount += amount;
-        if (gameGoalCount <= 0)
+        if (gameGoalCount < 0)
+            gameGoalCount = 0;
+
+        CheckWinCondition();
+    }
+
+    // Call this when player reaches the end trigger
+    public void PlayerReachedEnd()
+    {
+        playerAtEnd = true;
+        CheckWinCondition();
+    }
+    public void PlayerLeftEnd()
+    {
+        playerAtEnd = false;
+    }
+
+    // Check if all enemies killed and player reached end
+    private void CheckWinCondition()
+    {
+        if (gameGoalCount == 0 && playerAtEnd)
         {
-            // you win!!
+            // You win: pause and show win menu
             statePause();
             menuActive = menuWin;
             menuActive.SetActive(true);
