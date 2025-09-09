@@ -31,7 +31,7 @@ public class DiamondManager : MonoBehaviour
         //new
         if( remaining == 0 )
         {
-            ValGameManager.instance?.winMenu();
+            gameManager.instance?.updateGameGoal(0); //get win menu here
         }
     } 
 
