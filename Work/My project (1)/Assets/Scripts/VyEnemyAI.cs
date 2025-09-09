@@ -1,122 +1,90 @@
-﻿using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Rendering;
+﻿using System.Collections;
+using UnityEngine;
 
-public class VyEnemyAI : MonoBehaviour
+public class VyenemyAI : MonoBehaviour, IDamage
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public NavMeshAgent agent;
+    [SerializeField] Renderer model;
+    [SerializeField] Transform shootPos;
+    [SerializeField] int HP;
+    [SerializeField] int faceTargetSpeed;
+    [SerializeField] GameObject bullet;
+    [SerializeField] float shootRate;
 
-    public Transform player;
-    public LayerMask maskGround, maskPlayer;
-
-    public float health;
-
-    //patrolling
-    public Vector3 walkPoint;
-    bool walkPointSet;
-    public float walkPointRange;
-
-    //Attacking
-    public float timeBetweenAttacks;
-    bool alreadyAttacked;
-    public GameObject projectile;
-
-    //States
-    public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
-
-    private void Awake()
-    {
-        player = GameObject.Find("Player").transform;
-        agent = GetComponent<NavMeshAgent>();
-    }
-
+    Color colorOrig;
+    float shootTimer;
+    bool playerInTrigger;
+    Vector3 playerDir;
 
     void Start()
     {
-
+        colorOrig = model.material.color;
+        gameManager.instance.updateGameGoal(1);
     }
 
     void Update()
     {
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, maskPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, maskPlayer);
+        shootTimer += Time.deltaTime;
 
-        if (!playerInSightRange && !playerInAttackRange) Patroling();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange && playerInSightRange) AttackPlayer();
-    }
-
-    private void Patroling()
-    {
-        if (!walkPointSet) SearchWalkPoint();
-
-        if(walkPointSet)
-            agent.SetDestination(walkPoint);
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        if (distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
-
-    }
-    private void SearchWalkPoint()
-    {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-        walkPoint = new Vector3(transform.position.x + transform.position.y, transform.position.z);
-
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, maskGround))
-            walkPointSet = true;
-    }
-
-    private void ChasePlayer()
-    {
-        agent.SetDestination(transform.position);
-
-    }
-
-    private void AttackPlayer()
-    {
-        agent.SetDestination(transform.position);
-        transform.LookAt(player);
-        if (!alreadyAttacked)
+        if (playerInTrigger)
         {
-            Rigidbody rb = Instantiate (projectile,transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
-
+            playerDir = gameManager.instance.player.transform.position - transform.position;
+            faceTarget();
+            if (shootTimer >= shootRate)
+            {
+                shoot();
+            }
         }
-
-    }
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
     }
 
-    public void TakeDamage(int damage)
+    void faceTarget()
     {
-        health -= damage;
-
-        if (health <= 0) Invoke(nameof(DestroyEnemy), .5f);
-
-    }
-    private void DestroyEnemy()
-    {
-        Destroy(gameObject);
+        Vector3 lookDir = new Vector3(playerDir.x, playerDir.y, playerDir.z);
+        if (lookDir != Vector3.zero)
+        {
+            Quaternion rot = Quaternion.LookRotation(lookDir);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, faceTargetSpeed * Time.deltaTime);
+        }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnTriggerEnter(Collider other)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position,attackRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, sightRange);
+        if (other.CompareTag("Player"))
+            playerInTrigger = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            playerInTrigger = false;
+    }
+
+    void shoot()
+    {
+        shootTimer = 0;
+        Instantiate(bullet, shootPos.position, transform.rotation);
     
+
+        Debug.Log("Enemy Shooting!");
     }
 
+    public void takeDamage(int amount)
+    {
+        if (HP > 0)
+        {
+            HP -= amount;
+            StartCoroutine(flashRed());
+        }
+        if (HP <= 0)
+        {
+            gameManager.instance.updateGameGoal(-1);
+            Destroy(gameObject);
+        }
+    }
+
+    IEnumerator flashRed()
+    {
+        model.material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        model.material.color = colorOrig;
+    }
 }
