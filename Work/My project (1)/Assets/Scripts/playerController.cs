@@ -98,4 +98,9 @@ public class playerController : MonoBehaviour
             }*/
         }
     }
+
+    //void Attack()
+    //{
+
+    //}
 }
