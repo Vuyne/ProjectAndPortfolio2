@@ -1610,10 +1610,10 @@ MonoBehaviour:
   smoothY: 0
   maskWall:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   maskGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   wallRunForce: 5
   maxWallRunTime: 1.5
   wallCheckDistance: 1
@@ -2158,6 +2158,11 @@ MonoBehaviour:
   lockVertMin: -90
   lockVertMax: 90
   invertY: 0
+--- !u!54 &1288690675 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 3669055178631312911, guid: 8275ba5e1dcef2d4a9d84d0bfb8bbc61, type: 3}
+  m_PrefabInstance: {fileID: 4150272394465935803}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1365407187
 GameObject:
   m_ObjectHideFlags: 0
@@ -2281,7 +2286,7 @@ GameObject:
   - component: {fileID: 1455983724}
   - component: {fileID: 1455983723}
   - component: {fileID: 1455983722}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3293,8 +3298,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4737639825633258211, guid: 8275ba5e1dcef2d4a9d84d0bfb8bbc61, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1288690675}
+    - target: {fileID: 4737639825633258211, guid: 8275ba5e1dcef2d4a9d84d0bfb8bbc61, type: 3}
       propertyPath: hoverAmplitude
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7024380661208198195, guid: 8275ba5e1dcef2d4a9d84d0bfb8bbc61, type: 3}
       propertyPath: m_Name
