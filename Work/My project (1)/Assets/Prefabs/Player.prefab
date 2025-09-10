@@ -410,7 +410,7 @@ MonoBehaviour:
   jumpMax: 2
   shootDamage: 5
   shootRate: 0.1
-  shootDist: 5
+  shootDist: 200
 --- !u!54 &6654329228355421341
 Rigidbody:
   m_ObjectHideFlags: 0
