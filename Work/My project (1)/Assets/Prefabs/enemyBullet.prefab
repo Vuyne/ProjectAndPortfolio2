@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 1675495585932976740}
   - component: {fileID: 807430582006789975}
   - component: {fileID: -8339456385544549280}
-  m_Layer: 0
-  m_Name: bullet
+  m_Layer: 8
+  m_Name: enemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +118,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
