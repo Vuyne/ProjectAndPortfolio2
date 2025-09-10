@@ -21,7 +21,7 @@ public class playerMovement : MonoBehaviour, IDamage
     int HPOrig;
 
     bool isSprinting;
-    [Header("Wall Run")]
+   [Header("Wall Run")]
     public LayerMask maskWall;
 
     public float wallRunForce = 5f;
@@ -109,6 +109,8 @@ public class playerMovement : MonoBehaviour, IDamage
     void shoot()
     {
         shootTimer = 0;
+        GetComponent<CameraFOV>().FireKick();
+
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
@@ -207,7 +209,7 @@ public class playerMovement : MonoBehaviour, IDamage
             rb.linearVelocity = wallForward * speed
                               + wallNormal * wallRunForce
                               + Vector3.up * jumpForce;
-            jumpCount = 1; // reset lại nhảy trên tường, tránh vô hạn jump
+            jumpCount = 1; 
             wallRunTimer = 0;
         }
     }

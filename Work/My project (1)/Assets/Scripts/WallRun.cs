@@ -14,8 +14,7 @@ public class WallRun : MonoBehaviour
 
     public float wallGravityDownForce = 20f;
 
-    public bool useSprint ;
-
+    
    
 
     

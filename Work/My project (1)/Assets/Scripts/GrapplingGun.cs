@@ -87,7 +87,7 @@ public class GrapplingGun : MonoBehaviour
         lineRender.SetPosition(1, grabPoint);
     }
 
-    public bool IsGrappling()
+   /* public bool IsGrappling()
     {
         return joint != null;
     }
@@ -95,5 +95,5 @@ public class GrapplingGun : MonoBehaviour
     public Vector3 GetGrapplePoint()
     {
         return grabPoint;
-    }
+    }*/
 }
