@@ -13,6 +13,7 @@ public class gameManager : MonoBehaviour
     public GameObject playerDamageFlash;
     public GameObject player;
     public playerController playerScript;
+    public RJPlayerController playerScript1;
 
     public bool isPaused;
 
@@ -28,6 +29,7 @@ public class gameManager : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<playerController>();
+        playerScript1 = player.GetComponent<RJPlayerController>();
     }
 
     // Update is called once per frame

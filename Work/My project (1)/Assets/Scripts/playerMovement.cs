@@ -21,6 +21,7 @@ public class playerMovement : MonoBehaviour, IDamage
     int HPOrig;
 
     bool isSprinting;
+   
 
     void Start()
     {
@@ -53,6 +54,8 @@ public class playerMovement : MonoBehaviour, IDamage
         rb.linearVelocity = newVel;
 
         jump();
+
+      
     }
 
     void jump()
@@ -125,4 +128,5 @@ public class playerMovement : MonoBehaviour, IDamage
             jumpCount = 0;
         }
     }
+    
 }
