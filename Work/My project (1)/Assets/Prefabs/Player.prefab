@@ -256,7 +256,6 @@ GameObject:
   - component: {fileID: 5132238140481933166}
   - component: {fileID: 924482872837253957}
   - component: {fileID: 6460999550059952383}
-  - component: {fileID: 5535432520752393168}
   - component: {fileID: 4364759299600147928}
   - component: {fileID: 6654329228355421341}
   m_Layer: 3
@@ -386,46 +385,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5535432520752393168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5174595369072089994}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6d216201398c2d448986df6591f2986, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::playerController
-  controller: {fileID: 6460999550059952383}
-  ignoreLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  speed: 9
-  sprintMod: 4
-  jumpSpeed: 12
-  jumpMax: 2
-  gravity: 35
-  shootDamage: 0
-  shootRate: 0
-  shootDist: 0
-  gravityRush: 0
-  gravityFall: 0
-  verticalSmoothTime: 0
-  horizontalSmoothTime: 0.1
-  smoothY: 0
-  maskWall:
-    serializedVersion: 2
-    m_Bits: 1024
-  maskGround:
-    serializedVersion: 2
-    m_Bits: 512
-  wallRunForce: 5
-  maxWallRunTime: 1.5
-  wallCheckDistance: 1
-  minJumpHeight: 1.5
-  orientation: {fileID: 78178393488763206}
 --- !u!114 &4364759299600147928
 MonoBehaviour:
   m_ObjectHideFlags: 0
