@@ -4,7 +4,7 @@ using TMPro;
 public class DiamondManager : MonoBehaviour 
 {
     public TMP_Text counterText;
-    [SerializeField] ValGameManager gm; //new
+    [SerializeField] gameManager gm; //new
 
     int start, remaining;
 
@@ -12,7 +12,7 @@ public class DiamondManager : MonoBehaviour
     {
         if (gm == null)
         { 
-            gm = ValGameManager.instance;
+            gm = gameManager.instance;
         }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,13 +20,13 @@ public class DiamondManager : MonoBehaviour
     {
         start = GameObject.FindGameObjectsWithTag("Diamond").Length; ///all diamonds taged in the game
         remaining = start; ///first all diamonds are remaining
-        updateHelpermenu(); 
+        updateCountDiamond(); 
     }
 
    public void PickUpone()
     {
         remaining = Mathf.Max(remaining - 1, 0); /// not less than 0;
-        updateHelpermenu();
+        updateCountDiamond();
 
         //new
         if( remaining == 0 )
@@ -35,9 +35,9 @@ public class DiamondManager : MonoBehaviour
         }
     } 
 
-    void updateHelpermenu() 
+    void updateCountDiamond() 
     {
-        counterText.text = $"{remaining}/{start}";
+        counterText.text = $"{remaining}/{start}"; 
     }
 
     
