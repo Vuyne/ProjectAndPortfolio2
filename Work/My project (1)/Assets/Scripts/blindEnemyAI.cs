@@ -48,12 +48,6 @@ public class blindEnemyAI : EnemyBase
                     test = AudioPeer.currentAMP;
                     enemyAI.SetDestination(gameManager.instance.player.transform.position);
                     base.FaceTarget(targetPos);
-                    //if (!noisePos)
-                    //{
-                    //    test = AudioPeer.currentAMP;
-                    //    enemyAI.SetDestination(gameManager.instance.player.transform.position);
-                    //    base.FaceTarget(targetPos);
-                    //}
                 }
                 else
                 {
