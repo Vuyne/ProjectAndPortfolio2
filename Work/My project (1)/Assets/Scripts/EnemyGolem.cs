@@ -22,6 +22,11 @@ public class EnemyGolem : EnemyBase
         if (!playerInTrigger || gameManager.instance == null || gameManager.instance.player == null)
             return;
 
+        if (playerInTrigger)
+        {
+            agent.SetDestination(gameManager.instance.player.transform.position); //enemy follow player
+        }
+
 
     }
 }

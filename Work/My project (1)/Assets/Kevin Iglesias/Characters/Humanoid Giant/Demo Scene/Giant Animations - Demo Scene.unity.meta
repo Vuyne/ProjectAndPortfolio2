@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: 7e66d38d06f83294ca884df035c763fa
-NativeFormatImporter:
+guid: 5a27dd6c26da62c4782f7e68c54ab247
+DefaultImporter:
   externalObjects: {}
-  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -11,5 +10,6 @@ AssetOrigin:
   productId: 215962
   packageName: Giant Animations FREE
   packageVersion: 1.1
-  assetPath: Assets/Kevin Iglesias/Characters/Humanoid Giant/Demo Scene/Materials/FloorMaterial.mat
+  assetPath: Assets/Kevin Iglesias/Characters/Humanoid Giant/Demo Scene/Giant Animations
+    - Demo Scene.unity
   uploadId: 719181
