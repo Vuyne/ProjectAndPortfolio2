@@ -4,10 +4,12 @@ public class GrapplingGun : MonoBehaviour
 {
     private LineRenderer lineRender;
     private Vector3 grabPoint;
-    public LayerMask grappingItem;
+    public LayerMask maskGrappingItem;
     public Transform guntip, myCamera, player;
 
     [SerializeField] float maxDistance = 100f;
+    [SerializeField] float ropeStrength = 45f;
+    [SerializeField] float dampValue = 7f;
     private SpringJoint joint;
     private Vector3 currentGrabPosition;
 
@@ -21,11 +23,11 @@ public class GrapplingGun : MonoBehaviour
     void Update()
     {
         
-        if(Input.GetButtonDown("Fire1")) 
+        if(Input.GetButtonDown("Fire2")) 
           {
             StartGrab();
           }
-        else if(Input.GetButtonUp("Fire1"))
+        else if(Input.GetButtonUp("Fire2"))
         {
             StopGrab();
         }
@@ -34,7 +36,7 @@ public class GrapplingGun : MonoBehaviour
     void StartGrab()
     {
         RaycastHit hit;
-        if(Physics.Raycast(myCamera.position,myCamera.forward,out hit, maxDistance))
+        if(Physics.Raycast(myCamera.position,myCamera.forward,out hit, maxDistance,maskGrappingItem))
         {
             grabPoint = hit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
@@ -43,26 +45,26 @@ public class GrapplingGun : MonoBehaviour
 
             float distanceFromPoint = Vector3.Distance(player.position,grabPoint);
 
-            //can change!!!!!!!!!!!!
-            joint.maxDistance = distanceFromPoint * 0.8f;
+            //Physics!!!!!!!!!!!!
+            joint.maxDistance = 10f;
             joint.minDistance = distanceFromPoint * 0.25f;
-            joint.spring = 4.5f;
-            joint.damper = 7f;
+            joint.spring = ropeStrength;
+            joint.damper = dampValue;
             joint.massScale = 4.5f;
 
             lineRender.positionCount = 2;
             currentGrabPosition = guntip.position;
 
         }
-        Drawrope();
+        
 
     }
 
     void LateUpdate()
     {
-        
 
-        
+
+        Drawrope();
 
     }
 
@@ -85,7 +87,7 @@ public class GrapplingGun : MonoBehaviour
         lineRender.SetPosition(1, grabPoint);
     }
 
-    public bool IsGrappling()
+   /* public bool IsGrappling()
     {
         return joint != null;
     }
@@ -93,5 +95,5 @@ public class GrapplingGun : MonoBehaviour
     public Vector3 GetGrapplePoint()
     {
         return grabPoint;
-    }
+    }*/
 }

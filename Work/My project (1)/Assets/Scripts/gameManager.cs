@@ -1,5 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
@@ -8,6 +10,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] TMP_Text gameCountText;
+    [SerializeField] TMP_Text diamondCountText;
 
     public Image playerHPBar;
     public GameObject playerDamageFlash;
@@ -18,6 +22,8 @@ public class gameManager : MonoBehaviour
     public bool isPaused;
 
     int gameGoalCount;
+    int diamondCount;
+
     bool playerAtEnd;
 
     float timeScaleOrig;
@@ -70,6 +76,7 @@ public class gameManager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         gameGoalCount += amount;
+        gameCountText.text = gameGoalCount.ToString("F0");
         if (gameGoalCount < 0)
             gameGoalCount = 0;
 
@@ -88,7 +95,7 @@ public class gameManager : MonoBehaviour
     }
 
     // Check if all enemies killed and player reached end
-    private void CheckWinCondition()
+    public void CheckWinCondition() 
     {
         if (gameGoalCount == 0 && playerAtEnd)
         {
@@ -97,7 +104,17 @@ public class gameManager : MonoBehaviour
             menuActive = menuWin;
             menuActive.SetActive(true);
         }
+
+        if (gameGoalCount == 0 )
+        {
+            // You win: pause and show win menu
+            statePause();
+            menuActive = menuWin;
+            menuActive.SetActive(true);
+        }
+
     }
+
 
     public void youLose()
     {
