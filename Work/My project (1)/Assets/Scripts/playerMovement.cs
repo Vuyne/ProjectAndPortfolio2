@@ -169,7 +169,7 @@ public class playerMovement : MonoBehaviour, IDamage
 
     private void WallRunMovement()
     {
-        // tăng timer
+        // timer
         wallRunTimer += Time.deltaTime;
 
         if (wallRunTimer > maxWallRunTime)
@@ -178,26 +178,26 @@ public class playerMovement : MonoBehaviour, IDamage
             return;
         }
 
-        // giữ tốc độ rơi chậm lại
+        // Reduce gravity
         Vector3 velocity = rb.linearVelocity;
         velocity.y = Mathf.Max(velocity.y, -2f);
 
-        // lấy normal của tường
+        // Normal Wall
         Vector3 wallNormal = wallLeft ? leftWallHit.normal : rightWallHit.normal;
 
-        // tính hướng chạy dọc tường
+        // Wall Forward
         Vector3 wallForward = Vector3.Cross(wallNormal, Vector3.up);
         if (Vector3.Dot(wallForward, transform.forward) < 0)
             wallForward = -wallForward;
 
-        // nếu có input thì chạy theo tường
+        // Goforward to wall
         if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f)
         {
             rb.linearVelocity = wallForward * speed + new Vector3(0, velocity.y, 0);
         }
         else
         {
-            // tụt chậm xuống thay vì treo
+            // or fall a bit
             rb.linearVelocity = new Vector3(0, -1f, 0);
         }
 
