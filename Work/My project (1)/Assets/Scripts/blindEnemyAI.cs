@@ -9,8 +9,13 @@ public class blindEnemyAI : EnemyBase
     [SerializeField] Transform headPos;
     [SerializeField] Transform noisePos; 
     [SerializeField] Transform modelRoot;
+    [SerializeField] GameObject swipeAttack;
     [SerializeField] int enemySpeed;
+    [SerializeField] int enemyDamage;
+    [SerializeField] float enemyAttackCD;
+    [SerializeField] float enemyAttackRange;
 
+    float enemyAttackCDOrig;
     float hearingRadius;
     float hearingLevel;
     float test;
@@ -26,6 +31,7 @@ public class blindEnemyAI : EnemyBase
     protected override void Start()
     {
         if(!modelRoot) { modelRoot = transform; }
+        enemyAttackCDOrig = enemyAttackCD;
         hearingRadius = 10f;
         hearingLevel = 5e-7f;
         animator = GetComponent<Animator>();
@@ -36,25 +42,7 @@ public class blindEnemyAI : EnemyBase
     {
         if (!playerInTrigger || gameManager.instance == null || gameManager.instance.player == null)
             { return; }
-        Vector3 targetPos = gameManager.instance.player.transform.position - headPos.position;
-        Debug.DrawRay(headPos.position, targetPos);
-        RaycastHit hit;
-        if (Physics.Raycast(headPos.position, targetPos, out hit))
-        {
-            if (hit.collider.CompareTag("Player"))
-            {
-                if (AudioPeer.currentAMP > hearingLevel)
-                {
-                    test = AudioPeer.currentAMP;
-                    enemyAI.SetDestination(gameManager.instance.player.transform.position);
-                    base.FaceTarget(targetPos);
-                }
-                else
-                {
-                    enemyAI.isStopped = true;
-                }
-            }
-        }
+        attackPlayer();
         //animator.SetBool("isWalking", true);
 
         //animator.SetBool("FindingPlayer", true);
@@ -70,5 +58,58 @@ public class blindEnemyAI : EnemyBase
     {
         if (other.CompareTag("Player"))
             playerInTrigger = false;
+    }
+    void attackPlayer()
+    {
+        attackCD();
+        Vector3 targetPos = gameManager.instance.player.transform.position - headPos.position;
+        Debug.DrawRay(headPos.position, targetPos);
+        RaycastHit hit;
+        if (Physics.Raycast(headPos.position, targetPos, out hit))
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                if (AudioPeer.currentAMP > hearingLevel)
+                {
+                    enemyAI.SetDestination(gameManager.instance.player.transform.position);
+                    //isMoving = true;
+                    //animator.SetBool("isWalking", isMoving);
+                    if (enemyAI.remainingDistance <= enemyAI.stoppingDistance)
+                    {
+                        base.FaceTarget(targetPos);
+                        IDamage dmg = hit.collider.GetComponent<IDamage>();
+                        if (dmg != null && enemyAttackCD <= 0f && enemyAttackRange <= enemyAI.remainingDistance)
+                        {
+                            //animator.SetTrigger("punchAttack");
+                            test += Time.deltaTime;
+                            dmg.takeDamage(enemyDamage);
+                            enemyAttackCD = enemyAttackCDOrig;
+                        }
+                    }
+                }
+                else
+                {
+                    enemyAI.isStopped = true;
+                }
+                isMoving = false;
+                enemyAI.isStopped = false;
+            }
+        }
+
+    }
+    public override void takeDamage(int amount)
+    {
+       
+    }
+    void attackCD()
+    {
+        if (enemyAttackCD == enemyAttackCDOrig || enemyAttackCD > 0)
+        {
+            enemyAttackCD -= Time.deltaTime;
+        }
+        else if (enemyAttackCD == 0 || enemyAttackCD < 0)
+        {
+
+        }
     }
 }
