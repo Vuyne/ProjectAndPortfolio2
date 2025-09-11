@@ -595,9 +595,9 @@ MonoBehaviour:
   sprintMod: 2
   jumpForce: 6
   jumpMax: 2
-  shootDamage: 5
-  shootRate: 0.1
-  shootDist: 200
+  shootDamage: 2
+  shootRate: 0.6
+  shootDist: 20
   maskWall:
     serializedVersion: 2
     m_Bits: 1024
