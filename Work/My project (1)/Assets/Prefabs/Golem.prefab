@@ -441,7 +441,7 @@ MonoBehaviour:
   model: {fileID: 1239515562898440369}
   shootPos: {fileID: 0}
   bullet: {fileID: 0}
-  HP: 5
+  HP: 100
   shootRate: 2
   faceTargetSpeed: 5
   agent: {fileID: 2574152863268437021}
