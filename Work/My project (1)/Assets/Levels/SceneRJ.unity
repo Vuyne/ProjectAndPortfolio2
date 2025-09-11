@@ -571,8 +571,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0000002, y: 0.5, z: 1.0000002}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 1.0000002, y: 0.75, z: 1.0000002}
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!114 &728920047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,7 +585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8bd4756ce7654409abf4105b733de0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::movingPlatform
-  player: {fileID: 0}
+  player: {fileID: 2109998828}
 --- !u!1 &737516822
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,8 +772,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0000002, y: 0.5, z: 1.0000002}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 1.0000002, y: 0.75, z: 1.0000002}
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!114 &1631131169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,7 +786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8bd4756ce7654409abf4105b733de0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::movingPlatform
-  player: {fileID: 0}
+  player: {fileID: 2109998828}
 --- !u!1 &1704711029 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3798595939439012073, guid: d100a89a185056844b7b1ce9bf346a95, type: 3}
@@ -1059,6 +1059,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 876262472763362161, guid: d100a89a185056844b7b1ce9bf346a95, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338638057437757710, guid: d100a89a185056844b7b1ce9bf346a95, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3338638057437757710, guid: d100a89a185056844b7b1ce9bf346a95, type: 3}
       propertyPath: m_LocalPosition.x
       value: -26.419352
@@ -1110,6 +1118,10 @@ PrefabInstance:
     - target: {fileID: 4579763531453318448, guid: d100a89a185056844b7b1ce9bf346a95, type: 3}
       propertyPath: m_Name
       value: level4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6116248427367140667, guid: d100a89a185056844b7b1ce9bf346a95, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
