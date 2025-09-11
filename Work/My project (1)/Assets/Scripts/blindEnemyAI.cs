@@ -5,11 +5,9 @@ public class blindEnemyAI : EnemyBase
 {
     [SerializeField] Rigidbody rb;
     [SerializeField] NavMeshAgent enemyAI;
-    [SerializeField] Transform handPos;
     [SerializeField] Transform headPos;
     [SerializeField] Transform noisePos; 
     [SerializeField] Transform modelRoot;
-    [SerializeField] GameObject swipeAttack;
     [SerializeField] int enemySpeed;
     [SerializeField] int enemyDamage;
     [SerializeField] float enemyAttackCD;
@@ -81,7 +79,6 @@ public class blindEnemyAI : EnemyBase
                         if (dmg != null && enemyAttackCD <= 0f && enemyAttackRange <= enemyAI.remainingDistance)
                         {
                             //animator.SetTrigger("punchAttack");
-                            test += Time.deltaTime;
                             dmg.takeDamage(enemyDamage);
                             enemyAttackCD = enemyAttackCDOrig;
                         }
@@ -91,7 +88,7 @@ public class blindEnemyAI : EnemyBase
                 {
                     enemyAI.isStopped = true;
                 }
-                isMoving = false;
+                //isMoving = false;
                 enemyAI.isStopped = false;
             }
         }
@@ -103,11 +100,11 @@ public class blindEnemyAI : EnemyBase
     }
     void attackCD()
     {
-        if (enemyAttackCD == enemyAttackCDOrig || enemyAttackCD > 0)
+        if (enemyAttackCD > 0f)
         {
             enemyAttackCD -= Time.deltaTime;
         }
-        else if (enemyAttackCD == 0 || enemyAttackCD < 0)
+        else if (enemyAttackCD <= 0f)
         {
 
         }
