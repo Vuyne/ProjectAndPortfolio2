@@ -105,13 +105,6 @@ public class gameManager : MonoBehaviour
             menuActive.SetActive(true);
         }
 
-        if (gameGoalCount == 0 )
-        {
-            // You win: pause and show win menu
-            statePause();
-            menuActive = menuWin;
-            menuActive.SetActive(true);
-        }
 
     }
 
