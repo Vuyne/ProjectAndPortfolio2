@@ -6,16 +6,30 @@ public class cameraController : MonoBehaviour
     [SerializeField] int lockVertMin, lockVertMax;
     [SerializeField] bool invertY;
 
+    [SerializeField] float kickAmount = 5f;
+    [SerializeField] float kickSpeed = 10f;
+
+    float normalFOV;
     float rotX;
+    Camera cam;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        cam = GetComponent<Camera>();
+        normalFOV = cam.fieldOfView;
     }
 
     // Update is called once per frame
     void Update()
+    {
+        look();
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, normalFOV, Time.deltaTime * kickSpeed);
+    }
+
+
+    void look()
     {
         // get input 
         float mouseX = Input.GetAxisRaw("Mouse X") * sens * Time.deltaTime;
@@ -34,5 +48,11 @@ public class cameraController : MonoBehaviour
 
         //rotate the player to look left and right 
         transform.parent.Rotate(Vector3.up * mouseX);
+
+    }
+
+    public void FireKick()
+    {
+        cam.fieldOfView += kickAmount;
     }
 }

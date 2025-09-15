@@ -45,6 +45,8 @@ public class playerMovement : MonoBehaviour, IDamage
     float maxWalkingNoiseLvl;
     float noiseRadiusOrig;
 
+    private cameraController cam;
+
 
     void Start()
     {
@@ -142,6 +144,7 @@ public class playerMovement : MonoBehaviour, IDamage
             if (dmg != null)
             {
                 dmg.takeDamage(shootDamage);
+                cam.FireKick();
             }
         }
     }
