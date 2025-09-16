@@ -20,6 +20,8 @@ public class playerMovement : MonoBehaviour, IDamage
     int jumpCount;
     int HPOrig;
 
+    bool isMoving;
+
     bool isSprinting;
    [Header("Wall Run")]
     public LayerMask maskWall;
@@ -35,6 +37,15 @@ public class playerMovement : MonoBehaviour, IDamage
     private RaycastHit leftWallHit;
     private RaycastHit rightWallHit;
     private float wallRunTimer;
+
+    [Header("Footstep")]
+    AudioSource footsteps;
+    public float noiseLevel;
+    public float noiseRadius;
+    float maxWalkingNoiseLvl;
+    float noiseRadiusOrig;
+
+    private cameraController cam;
 
 
     void Start()
@@ -52,6 +63,8 @@ public class playerMovement : MonoBehaviour, IDamage
 
         if (Input.GetButton("Fire1") && shootTimer >= shootRate)
             shoot();
+
+        noiseUpdate();
     }
 
     void movement()
@@ -80,6 +93,14 @@ public class playerMovement : MonoBehaviour, IDamage
         {
             wallRunTimer = 0;
         }
+        if (move == Vector3.zero)
+        {
+            isMoving = false;
+        }
+        else
+        {
+            isMoving = true;
+        }
     }
 
     void jump()
@@ -98,11 +119,14 @@ public class playerMovement : MonoBehaviour, IDamage
         {
             speed *= sprintMod;
             isSprinting = true;
+            footsteps = GetComponent<AudioSource>();
+            footsteps.Play();
         }
         else if (Input.GetButtonUp("Sprint"))
         {
             speed /= sprintMod;
             isSprinting = false;
+            footsteps.Stop();
         }
     }
 
@@ -120,6 +144,7 @@ public class playerMovement : MonoBehaviour, IDamage
             if (dmg != null)
             {
                 dmg.takeDamage(shootDamage);
+                cam.FireKick();
             }
         }
     }
@@ -211,6 +236,47 @@ public class playerMovement : MonoBehaviour, IDamage
                               + Vector3.up * jumpForce;
             jumpCount = 1; 
             wallRunTimer = 0;
+        }
+    }
+    void noiseUpdate()
+    {
+        if (isMoving && !isSprinting)
+        {
+            if (noiseLevel == maxWalkingNoiseLvl)
+            {
+
+            }
+            else if (noiseLevel < maxWalkingNoiseLvl)
+                noiseLevel += Time.deltaTime;
+            else if (noiseLevel > maxWalkingNoiseLvl)
+                noiseLevel -= Time.deltaTime;
+        }
+        else if (isSprinting)
+        {
+            noiseLevel += Time.deltaTime * 2;
+        }
+        else if (noiseLevel > 0 && !isMoving && !isSprinting)
+        {
+            noiseLevel -= Time.deltaTime * 2;
+        }
+        noiseRadiusUpdate();
+    }
+    void noiseRadiusUpdate()
+    {
+        if (noiseLevel > 15f && isSprinting)
+        {
+            noiseRadius += Time.deltaTime;
+        }
+        else if (isMoving && !isSprinting)
+        {
+            if (noiseRadius > noiseRadiusOrig)
+                noiseRadius -= Time.deltaTime;
+
+        }
+        else if (!isMoving && !isSprinting)
+        {
+            if (noiseRadius > noiseRadiusOrig)
+                noiseRadius -= Time.deltaTime * 2;
         }
     }
 }
