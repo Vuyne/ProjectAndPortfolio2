@@ -96,7 +96,7 @@ public class blindEnemyAI : EnemyBase
     }
     public override void takeDamage(int amount)
     {
-       
+        base.HP -= 0;
     }
     void attackCD()
     {
