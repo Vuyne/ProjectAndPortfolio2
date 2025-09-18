@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 public class playerMovement : MonoBehaviour, IDamage
 {
@@ -20,6 +22,8 @@ public class playerMovement : MonoBehaviour, IDamage
     int jumpCount;
     int HPOrig;
 
+    bool isMoving;
+
     bool isSprinting;
    [Header("Wall Run")]
     public LayerMask maskWall;
@@ -36,6 +40,19 @@ public class playerMovement : MonoBehaviour, IDamage
     private RaycastHit rightWallHit;
     private float wallRunTimer;
 
+    [Header("Footstep")]
+    AudioSource footsteps;
+    public float noiseLevel;
+    public float noiseRadius;
+    float maxWalkingNoiseLvl;
+    float noiseRadiusOrig;
+
+    private cameraController cam;
+
+    [Header("Gun")]
+    [SerializeField] GameObject gunModel;
+    [SerializeField] List<gunStats> gunList = new List<gunStats>();
+    int gunListPos;
 
     void Start()
     {
@@ -47,11 +64,14 @@ public class playerMovement : MonoBehaviour, IDamage
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
 
-        movement();
+        if (!(gameManager.instance.isPaused))
+         {
+            movement();
+        }
+
         sprint();
 
-        if (Input.GetButton("Fire1") && shootTimer >= shootRate)
-            shoot();
+        noiseUpdate();
     }
 
     void movement()
@@ -80,6 +100,18 @@ public class playerMovement : MonoBehaviour, IDamage
         {
             wallRunTimer = 0;
         }
+        if (move == Vector3.zero)
+        {
+            isMoving = false;
+        }
+        else
+        {
+            isMoving = true;
+        }
+        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
+            shoot();
+        selectGun();
+        reload();
     }
 
     void jump()
@@ -98,11 +130,14 @@ public class playerMovement : MonoBehaviour, IDamage
         {
             speed *= sprintMod;
             isSprinting = true;
+            footsteps = GetComponent<AudioSource>();
+            footsteps.Play();
         }
         else if (Input.GetButtonUp("Sprint"))
         {
             speed /= sprintMod;
             isSprinting = false;
+            footsteps.Stop();
         }
     }
 
@@ -120,6 +155,7 @@ public class playerMovement : MonoBehaviour, IDamage
             if (dmg != null)
             {
                 dmg.takeDamage(shootDamage);
+                cam.FireKick();
             }
         }
     }
@@ -213,4 +249,84 @@ public class playerMovement : MonoBehaviour, IDamage
             wallRunTimer = 0;
         }
     }
+    void noiseUpdate()
+    {
+        if (isMoving && !isSprinting)
+        {
+            if (noiseLevel == maxWalkingNoiseLvl)
+            {
+
+            }
+            else if (noiseLevel < maxWalkingNoiseLvl)
+                noiseLevel += Time.deltaTime;
+            else if (noiseLevel > maxWalkingNoiseLvl)
+                noiseLevel -= Time.deltaTime;
+        }
+        else if (isSprinting)
+        {
+            noiseLevel += Time.deltaTime * 2;
+        }
+        else if (noiseLevel > 0 && !isMoving && !isSprinting)
+        {
+            noiseLevel -= Time.deltaTime * 2;
+        }
+        noiseRadiusUpdate();
+    }
+    void noiseRadiusUpdate()
+    {
+        if (noiseLevel > 15f && isSprinting)
+        {
+            noiseRadius += Time.deltaTime;
+        }
+        else if (isMoving && !isSprinting)
+        {
+            if (noiseRadius > noiseRadiusOrig)
+                noiseRadius -= Time.deltaTime;
+
+        }
+        else if (!isMoving && !isSprinting)
+        {
+            if (noiseRadius > noiseRadiusOrig)
+                noiseRadius -= Time.deltaTime * 2;
+        }
+    }
+    void selectGun()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
+        {
+            gunListPos++;
+            changeGun();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
+        {
+            gunListPos--;
+            changeGun();
+        }
+    }
+    void reload()
+    {
+        if (Input.GetButtonDown("Reload"))
+            gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
+        updatePlayerUI();
+    }
+    public void GetGunStats(gunStats gun)
+    {
+        gunList.Add(gun);
+        gunListPos = gunList.Count - 1;
+
+        changeGun();
+    }
+
+    void changeGun()
+    {
+        shootDamage = gunList[gunListPos].shootDamage;
+        shootDist = gunList[gunListPos].shootDist;
+        shootRate = gunList[gunListPos].shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].gunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+
+
+    }
+
 }

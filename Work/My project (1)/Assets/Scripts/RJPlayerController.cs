@@ -1,9 +1,5 @@
-﻿using NUnit.Framework.Internal;
-using System.Collections;
-using UnityEditor.Experimental.GraphView;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.Tilemaps.Tilemap;
 
 public class RJPlayerController : MonoBehaviour, IDamage
 {
