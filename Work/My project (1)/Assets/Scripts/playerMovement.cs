@@ -111,7 +111,7 @@ public class playerMovement : MonoBehaviour, IDamage
         if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
             shoot();
         selectGun();
-        reload();
+        //reload();
     }
 
     void jump()
@@ -303,12 +303,12 @@ public class playerMovement : MonoBehaviour, IDamage
             changeGun();
         }
     }
-    void reload()
+    /*void reload()
     {
         if (Input.GetButtonDown("Reload"))
             gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
         updatePlayerUI();
-    }
+    }*/
     public void GetGunStats(gunStats gun)
     {
         gunList.Add(gun);
