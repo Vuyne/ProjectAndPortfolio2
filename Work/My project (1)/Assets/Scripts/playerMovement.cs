@@ -1,9 +1,10 @@
-using UnityEngine;
+﻿using NUnit.Framework;
+using System;
 using System.Collections;
-using NUnit.Framework;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class playerMovement : MonoBehaviour, IDamage
+public class playerMovement : MonoBehaviour, IDamage,IPickup
 {
     [SerializeField] LayerMask ignoreLayer;
     [SerializeField] Rigidbody rb;
@@ -25,7 +26,7 @@ public class playerMovement : MonoBehaviour, IDamage
     bool isMoving;
 
     bool isSprinting;
-   [Header("Wall Run")]
+   /*[Header("Wall Run")]
     public LayerMask maskWall;
 
     public float wallRunForce = 5f;
@@ -38,7 +39,7 @@ public class playerMovement : MonoBehaviour, IDamage
     private bool wallRight;
     private RaycastHit leftWallHit;
     private RaycastHit rightWallHit;
-    private float wallRunTimer;
+    private float wallRunTimer;*/
 
     [Header("Footstep")]
     AudioSource footsteps;
@@ -51,7 +52,9 @@ public class playerMovement : MonoBehaviour, IDamage
 
     [Header("Gun")]
     [SerializeField] GameObject gunModel;
+    GameObject currentGun;
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
+    public Transform weaponPos;
     int gunListPos;
 
     void Start()
@@ -89,9 +92,9 @@ public class playerMovement : MonoBehaviour, IDamage
 
         jump();
 
-        CheckForWall();
+        //CheckForWall();
 
-        if ((wallLeft || wallRight) && CanWallRun())
+        /*if ((wallLeft || wallRight) && CanWallRun())
 
         {
             WallRunMovement();
@@ -107,11 +110,12 @@ public class playerMovement : MonoBehaviour, IDamage
         else
         {
             isMoving = true;
-        }
+        }*/
         if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
             shoot();
+
         selectGun();
-        //reload();
+        reload();
     }
 
     void jump()
@@ -159,6 +163,12 @@ public class playerMovement : MonoBehaviour, IDamage
             }
         }
     }
+    void reload()
+    {
+        if (Input.GetButtonDown("Reload"))
+            gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
+        updatePlayerUI();
+    }
 
     public void takeDamage(int amount)
     {
@@ -190,7 +200,7 @@ public class playerMovement : MonoBehaviour, IDamage
             jumpCount = 0;
         }
     }
-    private bool CanWallRun()
+    /*private bool CanWallRun()
     {
         return !Physics.Raycast(transform.position, Vector3.down, minJumpHeight);
     }
@@ -248,7 +258,7 @@ public class playerMovement : MonoBehaviour, IDamage
             jumpCount = 1; 
             wallRunTimer = 0;
         }
-    }
+    }*/
     void noiseUpdate()
     {
         if (isMoving && !isSprinting)
@@ -309,7 +319,7 @@ public class playerMovement : MonoBehaviour, IDamage
             gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
         updatePlayerUI();
     }*/
-    public void GetGunStats(gunStats gun)
+    public void getGunStats(gunStats gun)
     {
         gunList.Add(gun);
         gunListPos = gunList.Count - 1;
@@ -325,6 +335,12 @@ public class playerMovement : MonoBehaviour, IDamage
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+       // gunModel = Instantiate(gunList[gunListPos].gunModel, weaponPos);
+
+        // Reset transform về đúng vị trí trong weaponPos
+        //gunModel.transform.localPosition = Vector3.zero;
+       // gunModel.transform.localRotation = Quaternion.identity;
+       // gunModel.transform.localScale = Vector3.one;
 
 
     }

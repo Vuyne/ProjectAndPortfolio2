@@ -1,5 +1,94 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1471877924083515585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1348777052711055517}
+  - component: {fileID: 3013778385156337738}
+  - component: {fileID: 1326650361559134513}
+  m_Layer: 0
+  m_Name: gunModel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1348777052711055517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471877924083515585}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.10114305, z: -0, w: 0.9948719}
+  m_LocalPosition: {x: 0.52999985, y: -0.79999924, z: 0.49999994}
+  m_LocalScale: {x: 1.3299997, y: 1.33, z: 1.3299997}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1629286911293433771}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3013778385156337738
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471877924083515585}
+  m_Mesh: {fileID: 0}
+--- !u!23 &1326650361559134513
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471877924083515585}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1607879642339838485
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,17 +258,11 @@ MonoBehaviour:
   shootDamage: 2
   shootRate: 0.6
   shootDist: 20
-  maskWall:
-    serializedVersion: 2
-    m_Bits: 1024
-  wallRunForce: 5
-  maxWallRunTime: 1.5
-  wallCheckDistance: 1
-  minJumpHeight: 1.5
   noiseLevel: 0
   noiseRadius: 0
-  gunModel: {fileID: 0}
+  gunModel: {fileID: 1471877924083515585}
   gunList: []
+  weaponPos: {fileID: 7336600276532160518}
 --- !u!54 &4769980985536119051
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1387,6 +1470,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2624250667871304501}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3582346393794754479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7336600276532160518}
+  m_Layer: 0
+  m_Name: WeaponPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7336600276532160518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582346393794754479}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.10114308, z: -0, w: 0.994872}
+  m_LocalPosition: {x: 0.52999985, y: -0.79999924, z: 0.49999994}
+  m_LocalScale: {x: 1.3299999, y: 1.33, z: 1.3299999}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1629286911293433771}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3893149883803314070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1805,6 +1919,8 @@ Transform:
   - {fileID: 2624250667871304501}
   - {fileID: 9216945776012472866}
   - {fileID: 8163670346051932776}
+  - {fileID: 7336600276532160518}
+  - {fileID: 1348777052711055517}
   m_Father: {fileID: 4873282846066958354}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &189477809698975335
@@ -2016,6 +2132,10 @@ PrefabInstance:
     - target: {fileID: 8842301074728230077, guid: 77b5ab4acd932fb4badca7e05aaa915a, type: 3}
       propertyPath: m_Layer
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842301074728230077, guid: 77b5ab4acd932fb4badca7e05aaa915a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8842301074728230077, guid: 77b5ab4acd932fb4badca7e05aaa915a, type: 3}
       propertyPath: m_TagString
