@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Crossbow
   m_EditorClassIdentifier: Assembly-CSharp::gunStats
   gunModel: {fileID: 8370802328558119537, guid: 4a36f3a1e6f34494f8059f8dd3df1777, type: 3}
+  Grappable: 0
   shootDamage: 1
   shootRate: 0.1
-  shootDist: 5
+  shootDist: 20
   ammoCur: 5
   ammoMax: 5
   hitEffect: {fileID: 0}
