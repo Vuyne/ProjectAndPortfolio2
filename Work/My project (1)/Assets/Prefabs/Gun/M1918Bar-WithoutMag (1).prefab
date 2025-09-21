@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3703332055293956760}
   - component: {fileID: 1887319247214627469}
   - component: {fileID: 1084200793041768523}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: M1918Bar-WithoutMag (1)
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

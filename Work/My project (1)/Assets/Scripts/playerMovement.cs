@@ -54,6 +54,7 @@ public class playerMovement : MonoBehaviour, IDamage
     [SerializeField] GameObject gunModel;
     GameObject currentGun;
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
+    List<GameObject> gunInstances = new List<GameObject>();
     public Transform weaponPos;
     int gunListPos;
 
@@ -330,6 +331,10 @@ public class playerMovement : MonoBehaviour, IDamage
     public void getGunStats(gunStats gun)
     {
         gunList.Add(gun);
+        
+        GameObject newGun = Instantiate(gun.gunModel, weaponPos);
+        newGun.SetActive(false);
+        gunInstances.Add(newGun);
         gunListPos = gunList.Count - 1;
 
         changeGun();
@@ -337,18 +342,21 @@ public class playerMovement : MonoBehaviour, IDamage
 
     void changeGun()
     {
+        for (int i = 0; i < gunInstances.Count; i++)
+        {
+            gunInstances[i].SetActive(false);
+        }
+
+      
+        gunInstances[gunListPos].SetActive(true);
+        currentGun = gunInstances[gunListPos];
+
         shootDamage = gunList[gunListPos].shootDamage;
         shootDist = gunList[gunListPos].shootDist;
         shootRate = gunList[gunListPos].shootRate;
 
-        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].gunModel.GetComponent<MeshFilter>().sharedMesh;
-        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
-       // gunModel = Instantiate(gunList[gunListPos].gunModel, weaponPos);
-
-        // Reset transform về đúng vị trí trong weaponPos
-        //gunModel.transform.localPosition = Vector3.zero;
-       // gunModel.transform.localRotation = Quaternion.identity;
-       // gunModel.transform.localScale = Vector3.one;
+        //gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].gunModel.GetComponent<MeshFilter>().sharedMesh;
+       // gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
 
 
     }

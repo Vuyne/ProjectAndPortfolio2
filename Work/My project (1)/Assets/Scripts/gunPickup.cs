@@ -6,6 +6,7 @@ public class GunPickup : MonoBehaviour, IPickup
 
     public void OnPickup(GameObject player)
     {
+        Debug.Log("Triggered");
         gun.ammoCur = gun.ammoMax; // refill ammo
         player.GetComponent<playerMovement>().getGunStats(gun);
 
