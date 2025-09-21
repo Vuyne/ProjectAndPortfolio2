@@ -1,22 +1,19 @@
 using UnityEngine;
-using UnityEngine.AI; // for navmeshagent
+using UnityEngine.AI; //for navMesh
 
-public class EnemyGolem : EnemyBase
+public class ZombieEnemy : EnemyBase
 {
-    [SerializeField] NavMeshAgent agent;
-    [SerializeField] Transform modelRoot;
-
-    [SerializeField] float moveSpeed = 3f;
-    
+    [SerializeField] NavMeshAgent agent; //to walk 
+    [SerializeField] Rigidbody rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    protected override void Start()
+    void Start()
     {
-        if (!modelRoot) modelRoot = transform; 
+        
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
         if (!playerInTrigger || gameManager.instance == null || gameManager.instance.player == null)
             return;
@@ -26,5 +23,4 @@ public class EnemyGolem : EnemyBase
             agent.SetDestination(gameManager.instance.player.transform.position); //enemy follow player
         }
     }
-
 }
