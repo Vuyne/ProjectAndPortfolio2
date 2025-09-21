@@ -262,6 +262,7 @@ MonoBehaviour:
   gunModel: {fileID: 1471877924083515585}
   gunList: []
   weaponPos: {fileID: 7336600276532160518}
+  grabPos: {fileID: 0}
 --- !u!54 &4769980985536119051
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1740,7 +1741,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8163670346051932776}
   - component: {fileID: 8281487185041800333}
-  - component: {fileID: 2074418547600327374}
   - component: {fileID: 4127415636947627222}
   m_Layer: 0
   m_Name: gunCam
@@ -1815,14 +1815,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2074418547600327374
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4242080515291679987}
-  m_Enabled: 1
 --- !u!114 &4127415636947627222
 MonoBehaviour:
   m_ObjectHideFlags: 0
