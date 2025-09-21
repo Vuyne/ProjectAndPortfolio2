@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerMovement : MonoBehaviour, IDamage,IPickup
+public class playerMovement : MonoBehaviour, IDamage
 {
     [SerializeField] LayerMask ignoreLayer;
     [SerializeField] Rigidbody rb;
@@ -319,6 +319,14 @@ public class playerMovement : MonoBehaviour, IDamage,IPickup
             gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
         updatePlayerUI();
     }*/
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Player collided with: " + other.name);
+        if (other.TryGetComponent<IPickup>(out var pickup))
+        {
+            pickup.OnPickup(gameObject);
+        }
+    }
     public void getGunStats(gunStats gun)
     {
         gunList.Add(gun);
