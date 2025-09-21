@@ -23,6 +23,7 @@ public class gameManager : MonoBehaviour
 
     int gameGoalCount;
     int diamondCount;
+    int keyCount;
 
     bool playerAtEnd;
 
