@@ -20,6 +20,7 @@ public class GrapplingGun : MonoBehaviour
 
     void Awake()
     {
+        enabled = false;
         guntip = GameObject.FindWithTag("GunTip").transform;
        myCamera = Camera.main.transform;
         player = GameObject.FindWithTag("Player").transform;
