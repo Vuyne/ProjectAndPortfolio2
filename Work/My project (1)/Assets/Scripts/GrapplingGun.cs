@@ -77,7 +77,7 @@ public class GrapplingGun : MonoBehaviour
                 grabbedRb = hit.collider.attachedRigidbody;
                 if (grabbedRb != null)
                 {
-                    grabbedRb.isKinematic = false; // make sure it can fall
+                    grabbedRb.isKinematic = false; 
                     grabbedRb.useGravity = true;
                 }
                 fallTimer = fallDelay;

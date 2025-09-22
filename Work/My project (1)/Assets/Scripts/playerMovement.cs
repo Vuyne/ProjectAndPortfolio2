@@ -336,6 +336,7 @@ public class playerMovement : MonoBehaviour, IDamage
         {
             Debug.Log("Grab!!");
             GameObject Hook = Instantiate(gun.gunModel, grabPos);
+
         }
         else
         {
