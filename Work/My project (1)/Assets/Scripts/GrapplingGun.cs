@@ -6,6 +6,7 @@ public class GrapplingGun : MonoBehaviour
     private Vector3 grabPoint;
     public LayerMask maskGrappingItem;
     private Transform guntip, myCamera, player;
+    private Rigidbody grabbedRb;
 
     [SerializeField] float maxDistance = 100f;
     [SerializeField] float ropeStrength = 45f;
@@ -13,6 +14,9 @@ public class GrapplingGun : MonoBehaviour
     private SpringJoint joint;
     private Vector3 currentGrabPosition;
 
+    [SerializeField] float fallDelay = 2f;  
+    private float fallTimer;
+    private bool isAnchorBreaking;
 
     void Awake()
     {
@@ -25,8 +29,18 @@ public class GrapplingGun : MonoBehaviour
 
     void Update()
     {
-        
-        if(Input.GetButtonDown("Hook")) 
+        if (isAnchorBreaking)
+        {
+            fallTimer -= Time.deltaTime;
+            if (fallTimer <= 0f)
+            {
+                StopGrab(); 
+                isAnchorBreaking = false;
+            }
+        }
+    
+
+        if (Input.GetButtonDown("Hook")) 
           {
             StartGrab();
           }
@@ -39,14 +53,14 @@ public class GrapplingGun : MonoBehaviour
     void StartGrab()
     {
         RaycastHit hit;
-        if(Physics.Raycast(myCamera.position,myCamera.forward,out hit, maxDistance,maskGrappingItem))
+        if (Physics.Raycast(myCamera.position, myCamera.forward, out hit, maxDistance, maskGrappingItem))
         {
             grabPoint = hit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = grabPoint;
 
-            float distanceFromPoint = Vector3.Distance(player.position,grabPoint);
+            float distanceFromPoint = Vector3.Distance(player.position, grabPoint);
 
             //Physics!!!!!!!!!!!!
             joint.maxDistance = 10f;
@@ -58,10 +72,24 @@ public class GrapplingGun : MonoBehaviour
             lineRender.positionCount = 2;
             currentGrabPosition = guntip.position;
 
+            if (hit.collider.CompareTag("SpecialAnchor"))
+            {
+                grabbedRb = hit.collider.attachedRigidbody;
+                if (grabbedRb != null)
+                {
+                    grabbedRb.isKinematic = false; // make sure it can fall
+                    grabbedRb.useGravity = true;
+                }
+                fallTimer = fallDelay;
+                isAnchorBreaking = true;
+                fallTimer = fallDelay;
+            }
+
         }
+    }
         
 
-    }
+    
 
     void LateUpdate()
     {
