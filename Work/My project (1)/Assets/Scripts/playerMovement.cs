@@ -56,10 +56,12 @@ public class playerMovement : MonoBehaviour, IDamage
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
     List<GameObject> gunInstances = new List<GameObject>();
     public Transform weaponPos;
+    public Transform grabPos;
     int gunListPos;
 
     void Start()
     {
+
         HPOrig = HP;
         updatePlayerUI();
     }
@@ -149,7 +151,7 @@ public class playerMovement : MonoBehaviour, IDamage
     void shoot()
     {
         shootTimer = 0;
-        GetComponent<CameraFOV>().FireKick();
+      // GetComponent<CameraFOV>().FireKick();
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
@@ -160,7 +162,7 @@ public class playerMovement : MonoBehaviour, IDamage
             if (dmg != null)
             {
                 dmg.takeDamage(shootDamage);
-                cam.FireKick();
+              //  cam.FireKick();
             }
         }
     }
@@ -330,14 +332,22 @@ public class playerMovement : MonoBehaviour, IDamage
     }
     public void getGunStats(gunStats gun)
     {
-        gunList.Add(gun);
-        
-        GameObject newGun = Instantiate(gun.gunModel, weaponPos);
-        newGun.SetActive(false);
-        gunInstances.Add(newGun);
-        gunListPos = gunList.Count - 1;
+        if (gun.Grappable == true)
+        {
+            Debug.Log("Grab!!");
+            GameObject Hook = Instantiate(gun.gunModel, grabPos);
+        }
+        else
+        {
+            gunList.Add(gun);
 
-        changeGun();
+            GameObject newGun = Instantiate(gun.gunModel, weaponPos);
+            newGun.SetActive(false);
+            gunInstances.Add(newGun);
+            gunListPos = gunList.Count - 1;
+
+            changeGun();
+        }
     }
 
     void changeGun()

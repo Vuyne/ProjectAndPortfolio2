@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Diamond
   - Ground
+  - Gun
+  - GunTip
+  - SpecialAnchor
   layers:
   - Default
   - TransparentFX
