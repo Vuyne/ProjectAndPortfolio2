@@ -63,7 +63,7 @@ public class playerMovement : MonoBehaviour, IDamage
     {
 
         HPOrig = HP;
-        updatePlayerUI();
+        spawnPlayer();
     }
 
     void Update()
@@ -374,7 +374,9 @@ public class playerMovement : MonoBehaviour, IDamage
 
     public void spawnPlayer()
     {
-        
+        transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        HP = HPOrig;
+        updatePlayerUI();
     }
 
 }
