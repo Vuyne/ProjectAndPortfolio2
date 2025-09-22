@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class damageZombie : Damage
+public class damageZombie : MonoBehaviour
 {
 
     [SerializeField] int contactDmg = 1;
-    [SerializeField] float contactCooldown_ = 0.6f;
+    [SerializeField] float contactCooldown_ = 10f;
     bool canHit = true;
     Transform ownerRoot;
 
@@ -28,13 +28,15 @@ public class damageZombie : Damage
         if (other.isTrigger) return;
         if (!other.CompareTag("Player")) return;
         if (other.transform.root == ownerRoot) return;
-       
-        IDamage dmg = other.attachedRigidbody ? other.attachedRigidbody.GetComponent<IDamage>() 
-            : other.GetComponentInParent<IDamage>(); 
 
-        if(dmg != null)
+        // IDamage dmg = other.attachedRigidbody ? other.attachedRigidbody.GetComponent<IDamage>() 
+        // : other.GetComponentInParent<IDamage>(); 
+
+        IDamage dmg = other.GetComponent<IDamage>();
+
+        if (dmg != null)
         {
-            dmg.takeDamage(contactDmg);
+            dmg.takeDamage(contactDmg); 
             StartCoroutine(ContactCooldown());
         }
 
