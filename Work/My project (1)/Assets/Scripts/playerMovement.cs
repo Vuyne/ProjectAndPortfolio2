@@ -336,6 +336,7 @@ public class playerMovement : MonoBehaviour, IDamage
         {
             Debug.Log("Grab!!");
             GameObject Hook = Instantiate(gun.gunModel, grabPos);
+
         }
         else
         {
@@ -369,6 +370,11 @@ public class playerMovement : MonoBehaviour, IDamage
        // gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
 
 
+    }
+
+    public void spawnPlayer()
+    {
+        
     }
 
 }
