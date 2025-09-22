@@ -1,11 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GrapplingGun : MonoBehaviour
 {
     private LineRenderer lineRender;
     private Vector3 grabPoint;
     public LayerMask maskGrappingItem;
-    public Transform guntip, myCamera, player;
+    private Transform guntip, myCamera, player;
+    private Rigidbody grabbedRb;
 
     [SerializeField] float maxDistance = 100f;
     [SerializeField] float ropeStrength = 45f;
@@ -13,21 +14,45 @@ public class GrapplingGun : MonoBehaviour
     private SpringJoint joint;
     private Vector3 currentGrabPosition;
 
+    [SerializeField] float fallDelay = 2f;  
+    private float fallTimer;
+    private bool isAnchorBreaking;
 
     void Awake()
     {
+        enabled = false;
+        guntip = GameObject.FindWithTag("GunTip").transform;
+       myCamera = Camera.main.transform;
+        player = GameObject.FindWithTag("Player").transform;
 
         lineRender = GetComponent<LineRenderer>();
     }
 
     void Update()
     {
-        
-        if(Input.GetButtonDown("Fire2")) 
+        if (isAnchorBreaking)
+        {
+            fallTimer -= Time.deltaTime;
+
+            if (fallTimer <= 0f)
+            {
+                if (grabbedRb != null)
+                {
+                    grabbedRb.isKinematic = false;
+                    grabbedRb.useGravity = true;   
+                }
+                StopGrab();
+                isAnchorBreaking = false;
+            }
+        }
+
+
+
+        if (Input.GetButtonDown("Hook")) 
           {
             StartGrab();
           }
-        else if(Input.GetButtonUp("Fire2"))
+        else if(Input.GetButtonUp("Hook"))
         {
             StopGrab();
         }
@@ -36,14 +61,14 @@ public class GrapplingGun : MonoBehaviour
     void StartGrab()
     {
         RaycastHit hit;
-        if(Physics.Raycast(myCamera.position,myCamera.forward,out hit, maxDistance,maskGrappingItem))
+        if (Physics.Raycast(myCamera.position, myCamera.forward, out hit, maxDistance, maskGrappingItem))
         {
             grabPoint = hit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = grabPoint;
 
-            float distanceFromPoint = Vector3.Distance(player.position,grabPoint);
+            float distanceFromPoint = Vector3.Distance(player.position, grabPoint);
 
             //Physics!!!!!!!!!!!!
             joint.maxDistance = 10f;
@@ -55,10 +80,22 @@ public class GrapplingGun : MonoBehaviour
             lineRender.positionCount = 2;
             currentGrabPosition = guntip.position;
 
+            if (hit.collider.CompareTag("SpecialAnchor"))
+            {
+                grabbedRb = hit.collider.attachedRigidbody;
+                if (grabbedRb != null)
+                {
+                    grabbedRb.isKinematic = true; 
+                }
+                fallTimer = fallDelay;
+                isAnchorBreaking = true;
+            }
+
         }
+    }
         
 
-    }
+    
 
     void LateUpdate()
     {

@@ -12,5 +12,6 @@ EditorBuildSettings:
     path: Assets/Levels/Prototype 1.unity
     guid: 8eb2ed93a52276048aff7da9d92dba5d
   m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 6cdca97b95954894586c646fc982d27c, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
