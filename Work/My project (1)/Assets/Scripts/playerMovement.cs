@@ -64,6 +64,7 @@ public class playerMovement : MonoBehaviour, IDamage
 
         HPOrig = HP;
         spawnPlayer();
+        updatePlayerUI();
     }
 
     void Update()
