@@ -372,4 +372,9 @@ public class playerMovement : MonoBehaviour, IDamage
 
     }
 
+    public void spawnPlayer()
+    {
+        
+    }
+
 }
