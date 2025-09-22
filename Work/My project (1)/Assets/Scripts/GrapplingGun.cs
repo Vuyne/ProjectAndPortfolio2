@@ -5,7 +5,7 @@ public class GrapplingGun : MonoBehaviour
     private LineRenderer lineRender;
     private Vector3 grabPoint;
     public LayerMask maskGrappingItem;
-    public Transform guntip, myCamera, player;
+    private Transform guntip, myCamera, player;
 
     [SerializeField] float maxDistance = 100f;
     [SerializeField] float ropeStrength = 45f;
@@ -16,6 +16,9 @@ public class GrapplingGun : MonoBehaviour
 
     void Awake()
     {
+        guntip = GameObject.FindWithTag("GunTip").transform;
+       myCamera = Camera.main.transform;
+        player = GameObject.FindWithTag("Player").transform;
 
         lineRender = GetComponent<LineRenderer>();
     }
@@ -23,11 +26,11 @@ public class GrapplingGun : MonoBehaviour
     void Update()
     {
         
-        if(Input.GetButtonDown("Fire2")) 
+        if(Input.GetButtonDown("Hook")) 
           {
             StartGrab();
           }
-        else if(Input.GetButtonUp("Fire2"))
+        else if(Input.GetButtonUp("Hook"))
         {
             StopGrab();
         }

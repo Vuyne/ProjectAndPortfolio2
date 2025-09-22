@@ -332,8 +332,9 @@ public class playerMovement : MonoBehaviour, IDamage
     }
     public void getGunStats(gunStats gun)
     {
-        if (gun.Grappable)
+        if (gun.Grappable == true)
         {
+            Debug.Log("Grab!!");
             GameObject Hook = Instantiate(gun.gunModel, grabPos);
         }
         else

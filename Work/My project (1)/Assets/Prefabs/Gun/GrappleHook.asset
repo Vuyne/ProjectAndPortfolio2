@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6deb02bddb6c44d8bbf0fed1a86631, type: 3}
   m_Name: GrappleHook
   m_EditorClassIdentifier: Assembly-CSharp::gunStats
-  gunModel: {fileID: 4131909277904775623, guid: 6e4a77254fa699f469a6677fd23a4c6f, type: 3}
+  gunModel: {fileID: 3575284279450546683, guid: 7f9685222d59ed447840daa25bb6eab7, type: 3}
   Grappable: 1
   shootDamage: 1
   shootRate: 0.1
   shootDist: 5
-  ammoCur: 0
+  ammoCur: 5
   ammoMax: 5
   hitEffect: {fileID: 0}
   shootSound: []
