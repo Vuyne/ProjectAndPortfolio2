@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GrapplingGun : MonoBehaviour
 {
@@ -32,13 +32,20 @@ public class GrapplingGun : MonoBehaviour
         if (isAnchorBreaking)
         {
             fallTimer -= Time.deltaTime;
+
             if (fallTimer <= 0f)
             {
-                StopGrab(); 
+                if (grabbedRb != null)
+                {
+                    grabbedRb.isKinematic = false;
+                    grabbedRb.useGravity = true;   
+                }
+                StopGrab();
                 isAnchorBreaking = false;
             }
         }
-    
+
+
 
         if (Input.GetButtonDown("Hook")) 
           {
@@ -77,12 +84,10 @@ public class GrapplingGun : MonoBehaviour
                 grabbedRb = hit.collider.attachedRigidbody;
                 if (grabbedRb != null)
                 {
-                    grabbedRb.isKinematic = false; // make sure it can fall
-                    grabbedRb.useGravity = true;
+                    grabbedRb.isKinematic = true; 
                 }
                 fallTimer = fallDelay;
                 isAnchorBreaking = true;
-                fallTimer = fallDelay;
             }
 
         }
