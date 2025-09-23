@@ -337,6 +337,11 @@ public class playerMovement : MonoBehaviour, IDamage
         {
             Debug.Log("Grab!!");
             GameObject Hook = Instantiate(gun.gunModel, grabPos);
+            GrapplingGun grappling = Hook.GetComponent<GrapplingGun>();
+            if (grappling != null)
+            {
+                grappling.enabled = true;
+            }
 
         }
         else

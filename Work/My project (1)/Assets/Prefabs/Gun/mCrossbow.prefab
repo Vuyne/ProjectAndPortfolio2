@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7844585096439531470}
   - component: {fileID: 4322901926735082887}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: "\u5F29"
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2669894717283651442}
   - component: {fileID: 7971206608567412705}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: "\u6273\u673A"
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1549614309259717759}
   - component: {fileID: 715461402553412848}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: "\u7BAD"
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -349,7 +349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8916864711400297574}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Armature
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2202887832168487645}
   - component: {fileID: 1475728016952431170}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: "\u5F26"
   m_TagString: Gun
   m_Icon: {fileID: 0}
