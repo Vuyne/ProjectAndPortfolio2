@@ -1,9 +1,9 @@
-/*using UnityEngine;
+using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-   [SerializeField] private Key requiredKey;
-    [SerializeField] private KeyInventory keyInventory;
+    [SerializeField] private item requiredKey;
+    [SerializeField] private keyInventory keyInventory;
 
     [Header("Door Parts")]
     [SerializeField] private Animator anim;
@@ -15,12 +15,11 @@ public class Door : MonoBehaviour
         {
             anim.SetTrigger("Open");
             doorCollider.enabled = false;
-            Debug.Log("Door opened with key: " + requiredKey.KeyName);
+            Debug.Log("Door opened with key: " + requiredKey.itemName);
         }
         else
         {
-            Debug.Log("You need the " + requiredKey.KeyName + " to open this door.");
+            Debug.Log("You need the " + requiredKey.itemName + " to open this door.");
         }
     }
 }
-*/
