@@ -3,7 +3,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [SerializeField] private item requiredKey;
-    [SerializeField] private keyInventory keyInventory;   
+    [SerializeField] private keyInventory keyInventory;
 
     [Header("Door Parts")]
     [SerializeField] private Animator anim;

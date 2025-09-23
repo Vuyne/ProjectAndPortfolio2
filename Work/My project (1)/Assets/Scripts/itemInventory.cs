@@ -1,24 +1,16 @@
 using UnityEngine;
-using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = "Key Inventory")]
-public class keyInventory : ScriptableObject
+public class NewMonoBehaviourScript : MonoBehaviour
 {
-    private List<item> collectedKeys = new List<item>();
-
-    public void AddKey(item key)
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        if (!collectedKeys.Contains(key))
-            collectedKeys.Add(key);
+        
     }
 
-    public bool HasKey(item key)
+    // Update is called once per frame
+    void Update()
     {
-        return collectedKeys.Contains(key);
-    }
-
-    public void ResetKeys()
-    {
-        collectedKeys.Clear();
+        
     }
 }
