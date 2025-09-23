@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = "Key Inventory")]
-public class keyInventory : ScriptableObject
+
+public class keyInventory : MonoBehaviour
 {
     private List<item> collectedKeys = new List<item>();
 
