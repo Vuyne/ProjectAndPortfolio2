@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class blindEnemyAI : EnemyBase
 {
-    [SerializeField] Rigidbody rb;
+    //[SerializeField] Rigidbody rb;
     [SerializeField] NavMeshAgent enemyAI;
     [SerializeField] Transform headPos;
     [SerializeField] Transform noisePos; 
@@ -22,6 +22,7 @@ public class blindEnemyAI : EnemyBase
     float hearingRadius;
     float hearingLevel;
     float roamTimer;
+    float stoppingDistanceOrig;
     Vector3 startingPos;
     
  
@@ -34,25 +35,25 @@ public class blindEnemyAI : EnemyBase
         hearingLevel = 5e-7f;
         animator = GetComponent<Animator>();
         startingPos = transform.position;
+        stoppingDistanceOrig = enemyAI.stoppingDistance;
     }
 
     // Update is called once per frame
     protected override void Update()
     {
-        //if (!playerInTrigger || gameManager.instance == null || gameManager.instance.player == null)
-        //    { return; }
-        //animationLocation();
-        //attackPlayer();
-        if (enemyAI.stoppingDistance < 0.01f)
+        animationLocation();
+        if (enemyAI.remainingDistance < 0.01f)
             roamTimer += Time.deltaTime;
         if (playerInTrigger && AudioPeer.currentAMP < hearingLevel)
         {
             checkRoam();
         }
-        else if(!playerInTrigger)
+        else if (!playerInTrigger)
         {
             checkRoam();
         }
+        attackPlayer();
+        
     }
     protected override void OnTriggerEnter(Collider other)
     {
@@ -88,6 +89,7 @@ public class blindEnemyAI : EnemyBase
                             enemyAttackCD = enemyAttackCDOrig;
                         }
                     }
+                    enemyAI.stoppingDistance = stoppingDistanceOrig;
                 }
                 else
                 {
@@ -118,10 +120,11 @@ public class blindEnemyAI : EnemyBase
         float enemyCurrSpeed = enemyAI.velocity.normalized.magnitude;
         float animCurrSpeed = animator.GetFloat("Speed");
         animator.SetFloat("Speed", Mathf.Lerp(animCurrSpeed, enemyCurrSpeed, Time.deltaTime * animTransSpeed));
+
     }
     void checkRoam()
     {
-        if (roamTimer >= roamPauseTimer && enemyAI.stoppingDistance < 0.01f)
+        if (roamTimer >= roamPauseTimer && enemyAI.remainingDistance < 0.01f)
         {
             roam();
         }
@@ -130,7 +133,7 @@ public class blindEnemyAI : EnemyBase
     {
         roamTimer = 0;
         enemyAI.stoppingDistance = 0;
-        Vector3 randomPos = Random.insideUnitSphere * roamDistance;
+        Vector3 randomPos = UnityEngine.Random.insideUnitSphere * roamDistance;
         randomPos += startingPos;
         NavMeshHit hit;
         NavMesh.SamplePosition(randomPos, out hit, roamDistance, 1);
