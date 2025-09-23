@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6deb02bddb6c44d8bbf0fed1a86631, type: 3}
   m_Name: Pistol stats
   m_EditorClassIdentifier: Assembly-CSharp::gunStats
-  gunModel: {fileID: 5534874847616532687, guid: c08bd372cdff847d4be9a9d20c094ac2, type: 3}
+  gunModel: {fileID: 1389226789046872936, guid: 0b240f8136ffe4f0da814d74966c0b01, type: 3}
+  Grappable: 0
   shootDamage: 1
   shootRate: 0.1
   shootDist: 5

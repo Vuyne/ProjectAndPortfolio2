@@ -13,10 +13,11 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text gameCountText;
     [SerializeField] TMP_Text diamondCountText;
 
+    public GameObject checkpointPopup;//checpoint
     public Image playerHPBar;
     public GameObject playerDamageFlash;
     public GameObject player;
-    public playerController playerScript;
+    public playerMovement playerScript;
     public RJPlayerController playerScript1;
 
     public GameObject playerSpawnPos;
@@ -37,7 +38,7 @@ public class gameManager : MonoBehaviour
         timeScaleOrig = Time.timeScale;
 
         player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<playerController>();
+        playerScript = player.GetComponent<playerMovement>();
         playerScript1 = player.GetComponent<RJPlayerController>();
 
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos"); //respawn

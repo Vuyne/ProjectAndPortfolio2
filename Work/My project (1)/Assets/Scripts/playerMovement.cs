@@ -64,15 +64,15 @@ public class playerMovement : MonoBehaviour, IDamage
 
         HPOrig = HP;
         spawnPlayer();
-        updatePlayerUI();
+        //updatePlayerUI();
     }
 
     void Update()
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
 
-        if (!gameManager.instance.isPaused)
-        {
+        if (!(gameManager.instance.isPaused))
+         {
             movement();
         }
 
@@ -380,7 +380,7 @@ public class playerMovement : MonoBehaviour, IDamage
 
     public void spawnPlayer()
     {
-        rb.transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        transform.position = gameManager.instance.playerSpawnPos.transform.position; 
         HP = HPOrig;
         updatePlayerUI();
     }
