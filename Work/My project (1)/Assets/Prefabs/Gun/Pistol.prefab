@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5254306120538938964
+--- !u!1 &3675964515502817762
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4130256081801330465}
-  - component: {fileID: 7713826429123749775}
-  - component: {fileID: 3703332055293956760}
-  - component: {fileID: 1887319247214627469}
-  - component: {fileID: 1084200793041768523}
+  - component: {fileID: 4244355100692621834}
+  - component: {fileID: 6014876435718593116}
+  - component: {fileID: 821869326395572304}
+  - component: {fileID: 6478499814104202522}
+  - component: {fileID: 1450543121479844892}
   m_Layer: 13
-  m_Name: M1918Bar-WithoutMag (1)
+  m_Name: Pistol
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4130256081801330465
+--- !u!4 &4244355100692621834
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5254306120538938964}
+  m_GameObject: {fileID: 3675964515502817762}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.031815, y: 17.553307, z: 16.29049}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 71.55784, y: 17.7149, z: -9.286456}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7713826429123749775
+--- !u!33 &6014876435718593116
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5254306120538938964}
-  m_Mesh: {fileID: 7753405534921295286, guid: c1ce864051db441b9bfac2723519107a, type: 3}
---- !u!23 &3703332055293956760
+  m_GameObject: {fileID: 3675964515502817762}
+  m_Mesh: {fileID: -1885938411053853763, guid: 6c7c53c7f7c4243988c0c22154e73c49, type: 3}
+--- !u!23 &821869326395572304
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5254306120538938964}
+  m_GameObject: {fileID: 3675964515502817762}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2edc7b0cc34ac4680b9ff4f527c30174, type: 2}
+  - {fileID: 2100000, guid: 9504c921b7e175942b851dc8f2c4a1e7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91,13 +91,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1887319247214627469
+--- !u!114 &6478499814104202522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3675964515502817762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe52d0b51cc9c4848a7a25306074596b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunPickup
+  gun: {fileID: 11400000, guid: e57fdf88e9a43484e9484348be3b9dff, type: 2}
+--- !u!65 &1450543121479844892
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5254306120538938964}
+  m_GameObject: {fileID: 3675964515502817762}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -110,18 +123,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.26412758, y: 0.85430944, z: 3.0057898}
-  m_Center: {x: -0.018080603, y: -0.12615126, z: 0.15682381}
---- !u!114 &1084200793041768523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5254306120538938964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe52d0b51cc9c4848a7a25306074596b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::pickUp
-  gun: {fileID: 11400000, guid: e57fdf88e9a43484e9484348be3b9dff, type: 2}
+  m_Size: {x: 0.2945986, y: 0.97911215, z: 2.3059063}
+  m_Center: {x: -0.0014121085, y: -0.225339, z: -0.19020894}

@@ -136,7 +136,7 @@ public class RJPlayerController : MonoBehaviour, IDamage
     public void takeDamage(int damage)
     {
        HP -= damage;
-        updatePlayerUI();
+       updatePlayerUI();
        StartCoroutine(playerFlashDamage());
         if (HP <= 0)
         {

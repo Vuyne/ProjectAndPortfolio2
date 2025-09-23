@@ -18,7 +18,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamage
     {
         colorOrig = model.material.color;
         shootTimer = 0;
-        gameManager.instance?.updateGameGoal(1);
+        //gameManager.instance?.updateGameGoal(1);
     }
 
     protected virtual void Update()
