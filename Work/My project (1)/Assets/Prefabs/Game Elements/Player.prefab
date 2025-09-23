@@ -98,11 +98,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4873282846066958354}
+  - component: {fileID: 1547898817235910374}
   - component: {fileID: 7169252674044841131}
   - component: {fileID: 7188117637465390547}
   - component: {fileID: 1658539963356550321}
   - component: {fileID: 7984589076908555128}
-  - component: {fileID: 1547898817235910374}
   - component: {fileID: 4769980985536119051}
   - component: {fileID: 8139430985709905762}
   - component: {fileID: 6206766442375415829}
@@ -130,6 +130,36 @@ Transform:
   - {fileID: 1629286911293433771}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1547898817235910374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607879642339838485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983c6557c1afe6b469b9aa0ca9beea4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  rb: {fileID: 4769980985536119051}
+  HP: 5
+  speed: 10
+  sprintMod: 2
+  jumpForce: 6
+  jumpMax: 2
+  shootDamage: 2
+  shootRate: 0.6
+  shootDist: 20
+  noiseLevel: 0
+  noiseRadius: 0
+  gunModel: {fileID: 1471877924083515585}
+  gunList: []
+  weaponPos: {fileID: 7336600276532160518}
+  grabPos: {fileID: 6849659360557152459}
 --- !u!33 &7169252674044841131
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -234,36 +264,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1547898817235910374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607879642339838485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 983c6557c1afe6b469b9aa0ca9beea4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  ignoreLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  rb: {fileID: 4769980985536119051}
-  HP: 5
-  speed: 10
-  sprintMod: 2
-  jumpForce: 6
-  jumpMax: 2
-  shootDamage: 2
-  shootRate: 0.6
-  shootDist: 20
-  noiseLevel: 0
-  noiseRadius: 0
-  gunModel: {fileID: 1471877924083515585}
-  gunList: []
-  weaponPos: {fileID: 7336600276532160518}
-  grabPos: {fileID: 6849659360557152459}
 --- !u!54 &4769980985536119051
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1665,6 +1665,7 @@ MonoBehaviour:
   maxDistance: 20
   ropeStrength: 47
   dampValue: 7
+  fallDelay: 2
 --- !u!120 &4301558460817067023
 LineRenderer:
   serializedVersion: 2
