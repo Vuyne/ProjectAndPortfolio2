@@ -415,7 +415,6 @@ GameObject:
   - component: {fileID: 4428642896193997891}
   - component: {fileID: 2680108428873294763}
   - component: {fileID: 4794341046954080894}
-  - component: {fileID: 8331425751700477687}
   m_Layer: 13
   m_Name: mCrossbow
   m_TagString: Gun
@@ -477,33 +476,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunPickup
   gun: {fileID: 11400000, guid: 665a0bf72f29226439cbb51e6a3867fb, type: 2}
---- !u!54 &8331425751700477687
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8842301074728230077}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &8955006859666917812
 GameObject:
   m_ObjectHideFlags: 0
