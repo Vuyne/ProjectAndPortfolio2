@@ -22,4 +22,10 @@ public class buttonFunctions : MonoBehaviour
         Application.Quit();
 #endif
     }
+
+    public void respawn()
+    {
+        gameManager.instance.playerScript.spawnPlayer(); ///check player movement 
+        gameManager.instance.stateResume(); 
+    }
 }
