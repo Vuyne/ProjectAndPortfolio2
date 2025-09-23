@@ -1403,9 +1403,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7020443058477967993}
-  - component: {fileID: 5767622091660595671}
-  - component: {fileID: 8772487781268414980}
-  - component: {fileID: 817325320713383704}
+  - component: {fileID: 1572125101678105291}
   - component: {fileID: 8620563353789713664}
   m_Layer: 6
   m_Name: attackplayer
@@ -1429,7 +1427,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4467795257958349896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5767622091660595671
+--- !u!114 &1572125101678105291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1438,59 +1436,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5238339127686744141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd6b32f8062a6f243b56e92ea60f3f03, type: 3}
+  m_Script: {fileID: 11500000, guid: b5bd6534f4224e347bda686c4e2e38f3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::damageZombie
-  contactDmg: 1
-  contactCooldown_: 0.5
---- !u!135 &8772487781268414980
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5238339127686744141}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &817325320713383704
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5238339127686744141}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
+  m_EditorClassIdentifier: Assembly-CSharp::Damage
+  type: 1
+  rb: {fileID: 0}
+  damageAmount: 1
+  damageRate: 0
+  speed: 0
+  destroyTime: 0
 --- !u!65 &8620563353789713664
 BoxCollider:
   m_ObjectHideFlags: 0

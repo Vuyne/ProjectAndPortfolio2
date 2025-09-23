@@ -27,7 +27,7 @@ public class checkpoint : MonoBehaviour
     {
         gameManager.instance.checkpointPopup.SetActive(true); //turn on
         model.material.color = Color.blueViolet;
-        yield return new WaitForSeconds(0.5f); //how long we wait
+        yield return new WaitForSeconds(1.25f); //how long we wait
         model.material.color = colorOrig;
         gameManager.instance.checkpointPopup.SetActive(false); //turn it off
     }
