@@ -104,9 +104,9 @@ GameObject:
   - component: {fileID: 7984589076908555128}
   - component: {fileID: 1547898817235910374}
   - component: {fileID: 4769980985536119051}
-  - component: {fileID: 7980273350400103178}
   - component: {fileID: 8139430985709905762}
   - component: {fileID: 6206766442375415829}
+  - component: {fileID: 6413940271378817047}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -263,6 +263,7 @@ MonoBehaviour:
   gunModel: {fileID: 1471877924083515585}
   gunList: []
   weaponPos: {fileID: 7336600276532160518}
+  grabPos: {fileID: 6849659360557152459}
 --- !u!54 &4769980985536119051
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -290,21 +291,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &7980273350400103178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607879642339838485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a40cbf8303c408d4085eac047973b7ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraFOV
-  cam: {fileID: 189477809698975335}
-  kickAmount: 5
-  kickSpeed: 10
 --- !u!82 &8139430985709905762
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1439,6 +1425,52 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+--- !u!114 &6413940271378817047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607879642339838485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a40cbf8303c408d4085eac047973b7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFOV
+  cam: {fileID: 189477809698975335}
+  kickAmount: 5
+  kickSpeed: 10
+--- !u!1 &2013635562995645203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2293243502070266241}
+  m_Layer: 0
+  m_Name: GunTip
+  m_TagString: GunTip
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2293243502070266241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013635562995645203}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.7500001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6849659360557152459}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2391357618738410872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,7 +1517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7336600276532160518
 Transform:
   m_ObjectHideFlags: 0
@@ -1630,9 +1662,6 @@ MonoBehaviour:
   maskGrappingItem:
     serializedVersion: 2
     m_Bits: 2048
-  guntip: {fileID: 1132426160071715195}
-  myCamera: {fileID: 1629286911293433771}
-  player: {fileID: 4873282846066958354}
   maxDistance: 20
   ropeStrength: 47
   dampValue: 7
@@ -1756,7 +1785,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8163670346051932776}
   - component: {fileID: 8281487185041800333}
-  - component: {fileID: 2074418547600327374}
   - component: {fileID: 4127415636947627222}
   m_Layer: 0
   m_Name: gunCam
@@ -1811,7 +1839,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -1831,14 +1859,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2074418547600327374
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4242080515291679987}
-  m_Enabled: 1
 --- !u!114 &4127415636947627222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1883,6 +1903,38 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &5381082147986057476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6849659360557152459}
+  m_Layer: 13
+  m_Name: grapplingGun Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6849659360557152459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381082147986057476}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.11596586, z: -0, w: -0.99325323}
+  m_LocalPosition: {x: -1.1500001, y: -0.72999954, z: 1.3220637}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2293243502070266241}
+  m_Father: {fileID: 1629286911293433771}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5919084331311786977
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,6 +1968,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6849659360557152459}
   - {fileID: 2624250667871304501}
   - {fileID: 9216945776012472866}
   - {fileID: 8163670346051932776}
@@ -1954,7 +2007,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.16
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0

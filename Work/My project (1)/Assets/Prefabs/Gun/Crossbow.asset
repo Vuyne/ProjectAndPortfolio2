@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e6deb02bddb6c44d8bbf0fed1a86631, type: 3}
-  m_Name: Pistol-Stats
+  m_Name: Crossbow
   m_EditorClassIdentifier: Assembly-CSharp::gunStats
-  gunModel: {fileID: 8842301074728230077, guid: 77b5ab4acd932fb4badca7e05aaa915a, type: 3}
+  gunModel: {fileID: 8370802328558119537, guid: 4a36f3a1e6f34494f8059f8dd3df1777, type: 3}
+  Grappable: 0
   shootDamage: 1
   shootRate: 0.1
-  shootDist: 5
-  ammoCur: 0
+  shootDist: 20
+  ammoCur: 5
   ammoMax: 5
   hitEffect: {fileID: 0}
   shootSound: []

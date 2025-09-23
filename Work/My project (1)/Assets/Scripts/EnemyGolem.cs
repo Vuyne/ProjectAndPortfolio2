@@ -6,9 +6,6 @@ public class EnemyGolem : EnemyBase
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform modelRoot;
 
-    //[SerializeField] Transform attackRange;
-    //[SerializeField] GameObject stick;
-
     [SerializeField] float moveSpeed = 3f;
     
 
@@ -28,8 +25,6 @@ public class EnemyGolem : EnemyBase
         {
             agent.SetDestination(gameManager.instance.player.transform.position); //enemy follow player
         }
-
-        //Instantiate(stick, attackRange.position, transform.rotation); ///stick automatic faces where the player is facing.
     }
 
 }

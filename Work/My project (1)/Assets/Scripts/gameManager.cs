@@ -19,6 +19,8 @@ public class gameManager : MonoBehaviour
     public playerController playerScript;
     public RJPlayerController playerScript1;
 
+    public GameObject playerSpawnPos;
+
     public bool isPaused;
 
     int gameGoalCount;
@@ -37,6 +39,8 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         playerScript1 = player.GetComponent<RJPlayerController>();
+
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos"); //respawn
     }
 
     // Update is called once per frame

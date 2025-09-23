@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Diamond
   - Ground
+  - Gun
+  - GunTip
+  - SpecialAnchor
+  - Player Spawn Pos
   layers:
   - Default
   - TransparentFX

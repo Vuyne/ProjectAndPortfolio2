@@ -34,7 +34,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamage
             Shoot();
     }
 
-    protected virtual void FaceTarget(Vector3 dir)
+    protected virtual void FaceTarget(Vector3 dir)//how quick enemy will rotate to face us
     {
         if (dir == Vector3.zero) return;
         Quaternion rot = Quaternion.LookRotation(dir);
