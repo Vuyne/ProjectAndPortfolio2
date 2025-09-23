@@ -39,10 +39,12 @@ public class blindEnemyAI : EnemyBase
     // Update is called once per frame
     protected override void Update()
     {
-        if (!playerInTrigger || gameManager.instance == null || gameManager.instance.player == null)
-            { return; }
-        animationLocation();
-        attackPlayer();
+        //if (!playerInTrigger || gameManager.instance == null || gameManager.instance.player == null)
+        //    { return; }
+        //animationLocation();
+        //attackPlayer();
+        if (enemyAI.stoppingDistance < 0.01f)
+            roamTimer += Time.deltaTime;
         if (playerInTrigger && AudioPeer.currentAMP < hearingLevel)
         {
             checkRoam();
