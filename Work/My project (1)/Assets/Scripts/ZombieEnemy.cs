@@ -33,7 +33,7 @@ public class ZombieEnemy : EnemyBase
     protected override void Update()
     {
 
-        // setAnimLocomotion();
+         setAnimLocomotion();
 
         if (agent.remainingDistance < 0.01f)
         {
@@ -73,10 +73,10 @@ public class ZombieEnemy : EnemyBase
 
 
 
-    //void setAnimLocomotion()
-    //{
-    //    anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
-    //}
+    void setAnimLocomotion()
+    {
+       anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
+    }
 
     void checkRoam()
     {
