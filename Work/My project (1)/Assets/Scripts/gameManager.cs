@@ -12,6 +12,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text gameCountText;
     [SerializeField] TMP_Text diamondCountText;
+    public TMP_Text ammoCur, ammoMax;
 
     public GameObject checkpointPopup;//checpoint
     public Image playerHPBar;
@@ -103,7 +104,7 @@ public class gameManager : MonoBehaviour
     // Check if all enemies killed and player reached end
     public void CheckWinCondition() 
     {
-        if (gameGoalCount <= 0 && playerAtEnd && diamondCount <=0)
+        if ( playerAtEnd )
         {
             // You win: pause and show win menu
             statePause();
