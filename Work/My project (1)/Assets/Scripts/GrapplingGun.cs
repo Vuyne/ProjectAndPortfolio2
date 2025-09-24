@@ -14,9 +14,9 @@ public class GrapplingGun : MonoBehaviour
     private SpringJoint joint;
     private Vector3 currentGrabPosition;
 
-    [SerializeField] float fallDelay = 2f;  
-    private float fallTimer;
-    private bool isAnchorBreaking;
+   // [SerializeField] float fallDelay = 2f;  
+  //  private float fallTimer;
+   // private bool isAnchorBreaking;
 
     void Awake()
     {
@@ -30,7 +30,7 @@ public class GrapplingGun : MonoBehaviour
 
     void Update()
     {
-        if (isAnchorBreaking)
+        /*if (isAnchorBreaking)
         {
             fallTimer -= Time.deltaTime;
 
@@ -44,7 +44,7 @@ public class GrapplingGun : MonoBehaviour
                 StopGrab();
                 isAnchorBreaking = false;
             }
-        }
+        }*/
 
 
 
@@ -79,8 +79,14 @@ public class GrapplingGun : MonoBehaviour
 
             lineRender.positionCount = 2;
             currentGrabPosition = guntip.position;
+            fallAnchors anchor = hit.collider.GetComponent<fallAnchors>();
+            if (anchor != null)
+            {
+                anchor.OnGrabbed();
+                anchor.OnAnchorFall += StopGrab;
+            }
 
-            if (hit.collider.CompareTag("SpecialAnchor"))
+            /*if (hit.collider.CompareTag("SpecialAnchor"))
             {
                 grabbedRb = hit.collider.attachedRigidbody;
                 if (grabbedRb != null)
@@ -89,7 +95,7 @@ public class GrapplingGun : MonoBehaviour
                 }
                 fallTimer = fallDelay;
                 isAnchorBreaking = true;
-            }
+            }*/
 
         }
     }
