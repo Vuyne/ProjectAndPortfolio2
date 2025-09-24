@@ -24,7 +24,7 @@ public class keyTerminal : MonoBehaviour
 
     private void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        if (playerInRange && Input.GetButtonDown("Interact"))
         {
             DepositAllKeys();
         }
@@ -73,13 +73,25 @@ public class keyTerminal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"Triggered with: {other.name}, tag: {other.tag}");
+
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Player tag confirmed.");
             playerInv = other.GetComponent<keyInventory>();
+
             if (playerInv != null)
+            {
+                Debug.Log("Found keyInventory on player.");
                 playerInRange = true;
+            }
+            else
+            {
+                Debug.Log("No keyInventory found on Player!");
+            }
         }
     }
+
 
     private void OnTriggerExit(Collider other)
     {
