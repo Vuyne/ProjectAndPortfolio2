@@ -104,7 +104,7 @@ public class gameManager : MonoBehaviour
     // Check if all enemies killed and player reached end
     public void CheckWinCondition() 
     {
-        if (gameGoalCount <= 0 && playerAtEnd && diamondCount <=0)
+        if ( playerAtEnd )
         {
             // You win: pause and show win menu
             statePause();
