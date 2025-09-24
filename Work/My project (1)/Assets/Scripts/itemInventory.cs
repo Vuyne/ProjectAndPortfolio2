@@ -1,24 +1,27 @@
-using UnityEngine;
 using System.Collections.Generic;
-
+using UnityEngine;
 
 public class keyInventory : MonoBehaviour
 {
-    private List<item> collectedKeys = new List<item>();
+    private HashSet<item> keys = new HashSet<item>();
 
-    public void AddKey(item key)
+    public void AddKey(item keyID)
     {
-        if (!collectedKeys.Contains(key))
-            collectedKeys.Add(key);
+        keys.Add(keyID);
     }
 
-    public bool HasKey(item key)
+    public bool HasKey(item keyID)
     {
-        return collectedKeys.Contains(key);
+        return keys.Contains(keyID);
     }
 
-    public void ResetKeys()
+    public bool UseKey(item keyID)
     {
-        collectedKeys.Clear();
+        return keys.Remove(keyID);
+    }
+
+    public List<item> GetAllKeys()
+    {
+        return new List<item>(keys);
     }
 }

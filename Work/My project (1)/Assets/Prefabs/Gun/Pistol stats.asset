@@ -16,7 +16,7 @@ MonoBehaviour:
   Grappable: 0
   shootDamage: 1
   shootRate: 0.1
-  shootDist: 5
+  shootDist: 15
   ammoCur: 5
   ammoMax: 5
   hitEffect: {fileID: 8884371268655795233, guid: 20fda529c996a334da7fd65b48ea40df, type: 3}
