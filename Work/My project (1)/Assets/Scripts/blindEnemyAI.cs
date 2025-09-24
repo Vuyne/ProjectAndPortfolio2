@@ -23,6 +23,7 @@ public class blindEnemyAI : EnemyBase
     float hearingLevel;
     float roamTimer;
     float stoppingDistanceOrig;
+    int HPOrig;
     Vector3 startingPos;
     
  
@@ -75,7 +76,7 @@ public class blindEnemyAI : EnemyBase
         {
             if (hit.collider.CompareTag("Player"))
             {
-                if (AudioPeer.currentAMP > hearingLevel)
+                if (AudioPeer.currentAMP > hearingLevel && playerInTrigger)
                 {
                     enemyAI.SetDestination(gameManager.instance.player.transform.position);
                     if (enemyAI.remainingDistance <= enemyAI.stoppingDistance)
@@ -102,7 +103,11 @@ public class blindEnemyAI : EnemyBase
     }
     public override void takeDamage(int amount)
     {
-        base.HP -= amount;
+        HP -= amount;
+        if (HP <= HPOrig / 2)
+        {
+            animator.SetTrigger("Stunned");
+        }
     }
     void attackCD()
     {

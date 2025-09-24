@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class movingPlatform : MonoBehaviour
 {
-    [SerializeField] CharacterController player;
+    [SerializeField] Rigidbody player;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
