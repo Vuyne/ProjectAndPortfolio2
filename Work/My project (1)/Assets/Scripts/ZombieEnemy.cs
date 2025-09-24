@@ -148,15 +148,15 @@ public class ZombieEnemy : EnemyBase
     {
         if (HP > 0)
         {
-            //HP -= amount;
-            //StartCoroutine(flasRed());
+            HP -= amount;
+            StartCoroutine(FlashRed());
             agent.SetDestination(gameManager.instance.player.transform.position);
         }
 
-        //if (HP <= 0)
-        //{
-        //    gameManager.instance.updateGameGoal(-1);
-        //    Destroy(gameObject);
-        //}
+        if (HP <= 0)
+        {
+            gameManager.instance.updateGameGoal(-1);
+            Destroy(gameObject);
+        }
     }
 }
