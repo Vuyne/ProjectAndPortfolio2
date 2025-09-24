@@ -224,20 +224,47 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   rb: {fileID: 4769980985536119051}
-  HP: 5
+  HP: 1000
   speed: 10
   sprintMod: 2
-  jumpForce: 3
+  jumpForce: 300
   jumpMax: 2
   shootDamage: 2
   shootRate: 0.6
   shootDist: 20
+  arrow: {fileID: 1485033661919127732, guid: 9cf91ed6a1c1f3542abba4523b859489, type: 3}
+  arrowSpeed: 2
   noiseLevel: 0
   noiseRadius: 0
   gunModel: {fileID: 1471877924083515585}
   gunList: []
   weaponPos: {fileID: 7336600276532160518}
   grabPos: {fileID: 6849659360557152459}
+  aud: {fileID: 8139430985709905762}
+  audSteps:
+  - {fileID: 8300000, guid: 70464e00ed243ff46bb9896ce7faf171, type: 3}
+  - {fileID: 8300000, guid: 2950d156cb041e14d92ee17752f66b3f, type: 3}
+  - {fileID: 8300000, guid: a40c0bf7a71ff2545ad87e8f40d00f1f, type: 3}
+  - {fileID: 8300000, guid: 5c0ce8259fff98341b5c1d1a83a7cd1b, type: 3}
+  - {fileID: 8300000, guid: db1526d3152171444ade701d5f1cd748, type: 3}
+  - {fileID: 8300000, guid: 507ce45d79ee7454e996ff14b7edbd1e, type: 3}
+  - {fileID: 8300000, guid: 94b9a1df47f98cc4280d5ae25e0c5576, type: 3}
+  - {fileID: 8300000, guid: b4564388e840cb845adc89780069253d, type: 3}
+  - {fileID: 8300000, guid: e8e9af2521610c44d87984c41a7ab670, type: 3}
+  audStepsVol: 0.5
+  audHurt:
+  - {fileID: 8300000, guid: 89ac56c71b54c9947a93b5ce23c65697, type: 3}
+  - {fileID: 8300000, guid: 773b8104cf2fd8e48a0b25abab69fc2b, type: 3}
+  - {fileID: 8300000, guid: d58e96c44415fd249a68287c7bf4f3f4, type: 3}
+  - {fileID: 8300000, guid: bab2ff8d5a2b1c14a9146bf9958a906e, type: 3}
+  - {fileID: 8300000, guid: 18a2eecb6415ab24289ca80509db9900, type: 3}
+  - {fileID: 8300000, guid: ecad05dc7ea7d43409c39fb695fd4c87, type: 3}
+  audHurtVol: 0.5
+  audJump:
+  - {fileID: 8300000, guid: 210611ca17a77f348b189068a412b842, type: 3}
+  - {fileID: 8300000, guid: eee4a40ef38425845b352f060f1550b5, type: 3}
+  - {fileID: 8300000, guid: 2cdb35b865e6b6e4d8ea4e0648659fd3, type: 3}
+  audJumpVol: 0.535
 --- !u!54 &4769980985536119051
 Rigidbody:
   m_ObjectHideFlags: 0

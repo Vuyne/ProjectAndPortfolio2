@@ -19,6 +19,8 @@ public class playerMovement : MonoBehaviour, IDamage
     [SerializeField] int shootDamage;
     [SerializeField] float shootRate;
     [SerializeField] float shootDist;
+    [SerializeField] GameObject arrow;
+    [SerializeField] int arrowSpeed;
     Vector3 move;
 
     float shootTimer;
@@ -29,6 +31,8 @@ public class playerMovement : MonoBehaviour, IDamage
 
     bool isSprinting;
     bool isPlayingSteps;
+
+    
 
     [Header("Footstep")]
     
@@ -49,6 +53,7 @@ public class playerMovement : MonoBehaviour, IDamage
     int gunListPos;
     [Header("Audio")]
     AudioSource footsteps;
+    [SerializeField] AudioSource aud;
     [SerializeField] AudioClip[] audSteps;
     [UnityEngine.Range(0, 1)][SerializeField] float audStepsVol;
     [SerializeField] AudioClip[] audHurt;
@@ -105,6 +110,8 @@ public class playerMovement : MonoBehaviour, IDamage
 
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
+           aud.PlayOneShot(audJump[UnityEngine.Random.Range(0, audJump.Length)], audJumpVol);
+
             jumpCount++;
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
@@ -131,12 +138,25 @@ public class playerMovement : MonoBehaviour, IDamage
     {
         shootTimer = 0;
         // GetComponent<CameraFOV>().FireKick();
-        footsteps.PlayOneShot(gunList[gunListPos].shootSound[UnityEngine.Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
-            Instantiate(gunList[gunListPos].hitEffect, hit.point,quaternion.identity);
+            aud.PlayOneShot(gunList[gunListPos].shootSound[UnityEngine.Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
+            if (gunList[gunListPos].isCrossbow)
+            {
+                GameObject newArrow = Instantiate(arrow, weaponPos.position, weaponPos.rotation);
+
+                Rigidbody rbArrow = newArrow.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rbArrow.linearVelocity = transform.forward * arrowSpeed;
+                }
+            }
+            else
+            {
+                Instantiate(gunList[gunListPos].hitEffect, hit.point, quaternion.identity);
+            }
 
             Debug.Log(hit.collider.name);
 
@@ -158,7 +178,7 @@ public class playerMovement : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
-        footsteps.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audHurtVol);
+        aud.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audHurtVol);
 
         updatePlayerUI();
         StartCoroutine(flashDamage());
@@ -247,12 +267,7 @@ public class playerMovement : MonoBehaviour, IDamage
             changeGun();
         }
     }
-    /*void reload()
-    {
-        if (Input.GetButtonDown("Reload"))
-            gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
-        updatePlayerUI();
-    }*/
+  
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Player collided with: " + other.name);
@@ -318,7 +333,7 @@ public class playerMovement : MonoBehaviour, IDamage
     IEnumerator playStep()
     {
         isPlayingSteps = true;
-        footsteps.PlayOneShot(audSteps[UnityEngine.Random.Range(0, audSteps.Length)], audStepsVol);
+        aud.PlayOneShot(audSteps[UnityEngine.Random.Range(0, audSteps.Length)], audStepsVol);
 
         if (isSprinting)
         {

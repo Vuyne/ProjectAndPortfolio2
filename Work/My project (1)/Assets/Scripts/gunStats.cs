@@ -4,6 +4,7 @@ public class gunStats : ScriptableObject
 {
     public GameObject gunModel;
     public bool Grappable;
+    public bool isCrossbow;
     [Range(1, 10)] public int shootDamage;
     [Range(0.1f, 3)] public float shootRate;
     [Range(5, 500)] public int shootDist;
@@ -11,6 +12,7 @@ public class gunStats : ScriptableObject
     [Range(5, 50)] public int ammoMax;
 
     public ParticleSystem hitEffect;
+
     public AudioClip[] shootSound;
     [Range(0, 1)] public float shootSoundVol;
 
