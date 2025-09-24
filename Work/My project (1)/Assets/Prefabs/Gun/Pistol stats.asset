@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::gunStats
   gunModel: {fileID: 1389226789046872936, guid: 0b240f8136ffe4f0da814d74966c0b01, type: 3}
   Grappable: 0
+  isCrossbow: 0
   shootDamage: 1
   shootRate: 0.1
-  shootDist: 5
+  shootDist: 10
   ammoCur: 5
   ammoMax: 5
-  hitEffect: {fileID: 8884371268655795233, guid: 20fda529c996a334da7fd65b48ea40df, type: 3}
+  hitEffect: {fileID: 1301697207402410478, guid: 39f852c28f9c3fd45a427c24f3564ba7, type: 3}
   shootSound:
   - {fileID: 8300000, guid: 5cf92234bf7143345b81a715db077de7, type: 3}
-  shootSoundVol: 0
+  shootSoundVol: 0.5
