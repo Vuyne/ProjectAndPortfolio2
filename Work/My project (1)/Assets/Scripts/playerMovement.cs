@@ -197,6 +197,11 @@ public class playerMovement : MonoBehaviour, IDamage
     public void updatePlayerUI()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+        if (gunList.Count > 0)
+        {
+            gameManager.instance.ammoCur.text = gunList[gunListPos].ammoCur.ToString("F0");
+            gameManager.instance.ammoMax.text = gunList[gunListPos].ammoMax.ToString("F0");
+        }
     }
 
     IEnumerator flashDamage()
@@ -322,9 +327,10 @@ public class playerMovement : MonoBehaviour, IDamage
         shootDamage = gunList[gunListPos].shootDamage;
         shootDist = gunList[gunListPos].shootDist;
         shootRate = gunList[gunListPos].shootRate;
+        updatePlayerUI();
 
         //gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].gunModel.GetComponent<MeshFilter>().sharedMesh;
-       // gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+        // gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
 
 
     }
