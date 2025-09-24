@@ -16,11 +16,11 @@ MonoBehaviour:
   Grappable: 0
   isCrossbow: 1
   shootDamage: 1
-  shootRate: 0.1
-  shootDist: 20
-  ammoCur: 5
+  shootRate: 0.55
+  shootDist: 30
+  ammoCur: 0
   ammoMax: 5
   hitEffect: {fileID: 0}
   shootSound:
   - {fileID: 8300000, guid: b25cdfcfde1d0d945ab29ead4b3ce701, type: 3}
-  shootSoundVol: 0.4
+  shootSoundVol: 0.2

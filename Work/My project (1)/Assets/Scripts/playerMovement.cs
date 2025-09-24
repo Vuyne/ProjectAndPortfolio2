@@ -150,8 +150,12 @@ public class playerMovement : MonoBehaviour, IDamage
                 Rigidbody rbArrow = newArrow.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
-                    rbArrow.linearVelocity = transform.forward * arrowSpeed;
+                    Vector3 Hitdir = (hit.point - weaponPos.position).normalized;
+                    rbArrow.linearVelocity = Hitdir * arrowSpeed;
+                    newArrow.transform.forward = Hitdir;
+                    
                 }
+                Destroy(newArrow, 5f);
             }
             else
             {
@@ -166,6 +170,8 @@ public class playerMovement : MonoBehaviour, IDamage
                 dmg.takeDamage(shootDamage);
               //  cam.FireKick();
             }
+            gunList[gunListPos].ammoCur--;
+            updatePlayerUI();
         }
     }
     void reload()

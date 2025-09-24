@@ -233,7 +233,7 @@ MonoBehaviour:
   shootRate: 0.6
   shootDist: 20
   arrow: {fileID: 1485033661919127732, guid: 9cf91ed6a1c1f3542abba4523b859489, type: 3}
-  arrowSpeed: 2
+  arrowSpeed: 40
   noiseLevel: 0
   noiseRadius: 0
   gunModel: {fileID: 1471877924083515585}
