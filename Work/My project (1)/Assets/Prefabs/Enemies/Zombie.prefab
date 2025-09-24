@@ -1243,10 +1243,6 @@ MonoBehaviour:
   agent: {fileID: 2661597686693354031}
   anim: {fileID: 3294234872409328829}
   rb: {fileID: 0}
-  headPos: {fileID: 4874540863919374391}
-  FOV: 90
-  roamDist: 20
-  roamPauseTime: 3
 --- !u!195 &2661597686693354031
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1261,7 +1257,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 3
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
