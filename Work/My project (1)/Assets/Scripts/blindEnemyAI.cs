@@ -1,13 +1,18 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class blindEnemyAI : EnemyBase
 {
-    [SerializeField] Rigidbody rb;
+    //[SerializeField] Rigidbody rb;
     [SerializeField] NavMeshAgent enemyAI;
     [SerializeField] Transform headPos;
     [SerializeField] Transform noisePos; 
     [SerializeField] Transform modelRoot;
+    [SerializeField] Animator animator;
+    [SerializeField] int animTransSpeed;
+    [SerializeField] int roamDistance;
+    [SerializeField] int roamPauseTimer;
     [SerializeField] int enemySpeed;
     [SerializeField] int enemyDamage;
     [SerializeField] float enemyAttackCD;
@@ -16,14 +21,10 @@ public class blindEnemyAI : EnemyBase
     float enemyAttackCDOrig;
     float hearingRadius;
     float hearingLevel;
-    float test;
-    Animator animator;
-    bool isMoving;
-    bool isCrouching;
-    bool isJumping;
-    bool isRoaring;
-    bool isSniffing;
-    bool enemyAnimation;
+    float roamTimer;
+    float stoppingDistanceOrig;
+    Vector3 startingPos;
+    
  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -33,19 +34,26 @@ public class blindEnemyAI : EnemyBase
         hearingRadius = 10f;
         hearingLevel = 5e-7f;
         animator = GetComponent<Animator>();
+        startingPos = transform.position;
+        stoppingDistanceOrig = enemyAI.stoppingDistance;
     }
 
     // Update is called once per frame
     protected override void Update()
     {
-        if (!playerInTrigger || gameManager.instance == null || gameManager.instance.player == null)
-            { return; }
+        animationLocation();
+        if (enemyAI.remainingDistance < 0.01f)
+            roamTimer += Time.deltaTime;
+        if (playerInTrigger && AudioPeer.currentAMP < hearingLevel)
+        {
+            checkRoam();
+        }
+        else if (!playerInTrigger)
+        {
+            checkRoam();
+        }
         attackPlayer();
-        //animator.SetBool("isWalking", true);
-
-        //animator.SetBool("FindingPlayer", true);
-
-        //animator.SetTrigger("BiteAttack");
+        
     }
     protected override void OnTriggerEnter(Collider other)
     {
@@ -70,25 +78,23 @@ public class blindEnemyAI : EnemyBase
                 if (AudioPeer.currentAMP > hearingLevel)
                 {
                     enemyAI.SetDestination(gameManager.instance.player.transform.position);
-                    //isMoving = true;
-                    //animator.SetBool("isWalking", isMoving);
                     if (enemyAI.remainingDistance <= enemyAI.stoppingDistance)
                     {
                         base.FaceTarget(targetPos);
                         IDamage dmg = hit.collider.GetComponent<IDamage>();
-                        if (dmg != null && enemyAttackCD <= 0f && enemyAttackRange <= enemyAI.remainingDistance)
+                        if (dmg != null && enemyAttackCD <= 0.0f && enemyAttackRange <= enemyAI.remainingDistance)
                         {
-                            //animator.SetTrigger("punchAttack");
+                            animator.SetTrigger("Punch");
                             dmg.takeDamage(enemyDamage);
                             enemyAttackCD = enemyAttackCDOrig;
                         }
                     }
+                    enemyAI.stoppingDistance = stoppingDistanceOrig;
                 }
                 else
                 {
                     enemyAI.isStopped = true;
                 }
-                //isMoving = false;
                 enemyAI.isStopped = false;
             }
         }
@@ -96,7 +102,7 @@ public class blindEnemyAI : EnemyBase
     }
     public override void takeDamage(int amount)
     {
-       
+        base.HP -= amount;
     }
     void attackCD()
     {
@@ -108,5 +114,29 @@ public class blindEnemyAI : EnemyBase
         {
 
         }
+    }
+    void animationLocation()
+    {
+        float enemyCurrSpeed = enemyAI.velocity.normalized.magnitude;
+        float animCurrSpeed = animator.GetFloat("Speed");
+        animator.SetFloat("Speed", Mathf.Lerp(animCurrSpeed, enemyCurrSpeed, Time.deltaTime * animTransSpeed));
+
+    }
+    void checkRoam()
+    {
+        if (roamTimer >= roamPauseTimer && enemyAI.remainingDistance < 0.01f)
+        {
+            roam();
+        }
+    }
+    void roam()
+    {
+        roamTimer = 0;
+        enemyAI.stoppingDistance = 0;
+        Vector3 randomPos = UnityEngine.Random.insideUnitSphere * roamDistance;
+        randomPos += startingPos;
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomPos, out hit, roamDistance, 1);
+        enemyAI.SetDestination(hit.position);
     }
 }

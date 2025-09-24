@@ -10,6 +10,7 @@ TagManager:
   - GunTip
   - SpecialAnchor
   - Player Spawn Pos
+  - Arrow
   layers:
   - Default
   - TransparentFX

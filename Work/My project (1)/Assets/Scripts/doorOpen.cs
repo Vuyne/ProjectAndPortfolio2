@@ -1,26 +1,78 @@
-/*using UnityEngine;
+using UnityEngine;
 
-public class Door : MonoBehaviour
+public class DoorController : MonoBehaviour
 {
-   [SerializeField] private Key requiredKey;
-    [SerializeField] private KeyInventory keyInventory;
+    [Header("Door Settings")]
+    [SerializeField] item requiredKey;
 
-    [Header("Door Parts")]
-    [SerializeField] private Animator anim;
-    [SerializeField] private Collider doorCollider;
+    [Header("Visuals")]
+    [SerializeField] Renderer[] doorIndicators;
+    [SerializeField] Color lockedColor = Color.red;
+    [SerializeField] Color unlockedColor = Color.green;
 
-    public void TryOpen()
+    [Header("Sinking Settings")]
+    [SerializeField] Transform doorMesh;
+    [SerializeField] float sinkDistance = 5f;
+    [SerializeField] float sinkSpeed = 2f;
+
+    private bool isOpen = false;
+    private Vector3 initialPosition;
+    private Vector3 targetPosition;
+
+    private void Start()
     {
-        if (keyInventory.HasKey(requiredKey))
+        initialPosition = doorMesh.position;
+        targetPosition = initialPosition + Vector3.down * sinkDistance;
+
+        UpdateIndicators();
+    }
+
+    private void Update()
+    {
+        // Smooth sinking motion
+        if (isOpen && doorMesh.position != targetPosition)
         {
-            anim.SetTrigger("Open");
-            doorCollider.enabled = false;
-            Debug.Log("Door opened with key: " + requiredKey.KeyName);
+            doorMesh.position = Vector3.MoveTowards(doorMesh.position, targetPosition, sinkSpeed * Time.deltaTime);
+        }
+    }
+
+    /// <summary>
+    /// Called by terminal to notify the door about its keys.
+    /// </summary>
+    public void CheckTerminalKey(keyTerminal terminal)
+    {
+        if (!isOpen && terminal.HasKey(requiredKey))
+        {
+            Unlock();
         }
         else
         {
-            Debug.Log("You need the " + requiredKey.KeyName + " to open this door.");
+            UpdateIndicators();
         }
     }
+
+    private void Unlock()
+    {
+        if (isOpen) return;
+        isOpen = true;
+
+        UpdateIndicators();
+        Debug.Log($"{name} unlocked with key: {requiredKey}");
+    }
+
+    private void UpdateIndicators()
+    {
+        Color color = isOpen ? unlockedColor : lockedColor;
+        foreach (Renderer rend in doorIndicators)
+        {
+            if (rend != null)
+                rend.material.color = color;
+        }
+    }
+
+
+    public bool IsUnlocked()
+    {
+        return isOpen;
+    }
 }
-*/

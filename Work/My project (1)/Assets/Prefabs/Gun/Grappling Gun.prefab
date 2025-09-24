@@ -109,8 +109,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   maxDistance: 100
-  ropeStrength: 45
-  dampValue: 7
+  ropeStrength: 40
+  dampValue: 9999
   fallDelay: 2
 --- !u!114 &3135088736540288598
 MonoBehaviour:
