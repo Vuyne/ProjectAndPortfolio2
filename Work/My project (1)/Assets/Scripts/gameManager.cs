@@ -12,6 +12,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text gameCountText;
     [SerializeField] TMP_Text diamondCountText;
+    public TMP_Text ammoCur, ammoMax;
 
     public GameObject checkpointPopup;//checpoint
     public Image playerHPBar;
