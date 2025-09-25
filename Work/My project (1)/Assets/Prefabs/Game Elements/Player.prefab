@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 7169252674044841131}
   - component: {fileID: 7188117637465390547}
   - component: {fileID: 1658539963356550321}
+  - component: {fileID: 3799874466887342532}
   - component: {fileID: 1547898817235910374}
   - component: {fileID: 4769980985536119051}
   - component: {fileID: 8139430985709905762}
@@ -208,6 +209,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3799874466887342532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607879642339838485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75249f0128670954ba5ce4ece91aea10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::keyInventory
 --- !u!114 &1547898817235910374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +237,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   rb: {fileID: 4769980985536119051}
-  HP: 1000
+  HP: 1
   speed: 10
   sprintMod: 2
   jumpForce: 300
