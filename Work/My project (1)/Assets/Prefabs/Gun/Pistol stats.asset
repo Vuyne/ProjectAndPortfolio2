@@ -15,7 +15,7 @@ MonoBehaviour:
   gunModel: {fileID: 1389226789046872936, guid: 0b240f8136ffe4f0da814d74966c0b01, type: 3}
   Grappable: 0
   isCrossbow: 0
-  shootDamage: 8
+  shootDamage: 4
   shootRate: 0.4
   shootDist: 10
   ammoCur: 5

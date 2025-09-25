@@ -16,6 +16,7 @@ public class gameManager : MonoBehaviour
 
     public GameObject checkpointPopup;//checpoint
     public GameObject Teleporterpopup;//teleporter
+    public GameObject keyMenu;
     public Image playerHPBar;
     public GameObject playerDamageFlash;
     public GameObject player;

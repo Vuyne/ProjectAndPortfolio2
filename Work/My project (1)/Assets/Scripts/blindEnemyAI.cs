@@ -103,9 +103,13 @@ public class blindEnemyAI : EnemyBase
     public override void takeDamage(int amount)
     {
         HP -= amount;
-        if (HP <= HPOrig / 2)
+        if (true)   
         {
             animator.SetTrigger("Stunned");
+        }
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
         }
     }
     void attackCD()
