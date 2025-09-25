@@ -1,3 +1,4 @@
+using NUnit;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -19,10 +20,10 @@ public class blindEnemyAI : EnemyBase
     [SerializeField] float enemyAttackRange;
 
     float enemyAttackCDOrig;
-    float hearingRadius;
     float hearingLevel;
     float roamTimer;
     float stoppingDistanceOrig;
+    float distanceFromPlayer;
     int HPOrig;
     Vector3 startingPos;
     
@@ -32,7 +33,6 @@ public class blindEnemyAI : EnemyBase
     {
         if(!modelRoot) { modelRoot = transform; }
         enemyAttackCDOrig = enemyAttackCD;
-        hearingRadius = 10f;
         hearingLevel = 5e-7f;
         animator = GetComponent<Animator>();
         startingPos = transform.position;
@@ -43,8 +43,8 @@ public class blindEnemyAI : EnemyBase
     protected override void Update()
     {
         animationLocation();
-        if (enemyAI.remainingDistance < 0.01f)
-            roamTimer += Time.deltaTime;
+        if (/*enemyAI.remainingDistance < 0.01f*/ !enemyAI.isStopped)
+            roamTimer += Time.deltaTime / 3;
         if (playerInTrigger && AudioPeer.currentAMP < hearingLevel)
         {
             checkRoam();
@@ -54,7 +54,6 @@ public class blindEnemyAI : EnemyBase
             checkRoam();
         }
         attackPlayer();
-        
     }
     protected override void OnTriggerEnter(Collider other)
     {
@@ -76,7 +75,8 @@ public class blindEnemyAI : EnemyBase
         {
             if (hit.collider.CompareTag("Player"))
             {
-                if (AudioPeer.currentAMP > hearingLevel && playerInTrigger)
+                noiseLevel();
+                if (AudioPeer.currentAMP >= hearingLevel && playerInTrigger)
                 {
                     enemyAI.SetDestination(gameManager.instance.player.transform.position);
                     if (enemyAI.remainingDistance <= enemyAI.stoppingDistance)
@@ -99,7 +99,6 @@ public class blindEnemyAI : EnemyBase
                 enemyAI.isStopped = false;
             }
         }
-
     }
     public override void takeDamage(int amount)
     {
@@ -129,7 +128,7 @@ public class blindEnemyAI : EnemyBase
     }
     void checkRoam()
     {
-        if (roamTimer >= roamPauseTimer && enemyAI.remainingDistance < 0.01f)
+        if (roamTimer >= roamPauseTimer && /*enemyAI.remainingDistance < 0.01f*/ !enemyAI.isStopped)
         {
             roam();
         }
@@ -143,5 +142,12 @@ public class blindEnemyAI : EnemyBase
         NavMeshHit hit;
         NavMesh.SamplePosition(randomPos, out hit, roamDistance, 1);
         enemyAI.SetDestination(hit.position);
+    }
+    void noiseLevel()
+    {
+        float xDistance = gameManager.instance.player.transform.position.x - transform.position.x;
+        float yDistance = gameManager.instance.player.transform.position.x - transform.position.x;
+        distanceFromPlayer = Mathf.Sqrt((xDistance * xDistance) + (yDistance * yDistance));
+        AudioPeer.currentAMP = AudioPeer.currentAMP / distanceFromPlayer;
     }
 }

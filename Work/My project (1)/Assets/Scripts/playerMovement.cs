@@ -340,6 +340,12 @@ public class playerMovement : MonoBehaviour, IDamage
         HP = HPOrig;
         updatePlayerUI();
     }
+    public void teleporter()
+    {
+        transform.position = gameManager.instance.playerSpawnPos2.transform.position;
+        HP = HPOrig;
+        updatePlayerUI();
+    }
 
     IEnumerator playStep()
     {
