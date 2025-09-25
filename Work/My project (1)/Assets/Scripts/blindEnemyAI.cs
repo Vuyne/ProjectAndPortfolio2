@@ -24,7 +24,6 @@ public class blindEnemyAI : EnemyBase
     float roamTimer;
     float stoppingDistanceOrig;
     float distanceFromPlayer;
-    float test;
     int HPOrig;
     Vector3 startingPos;
     
@@ -44,7 +43,6 @@ public class blindEnemyAI : EnemyBase
     protected override void Update()
     {
         animationLocation();
-       test = enemyAI.remainingDistance;
         if (/*enemyAI.remainingDistance < 0.01f*/ !enemyAI.isStopped)
             roamTimer += Time.deltaTime / 3;
         if (playerInTrigger && AudioPeer.currentAMP < hearingLevel)
