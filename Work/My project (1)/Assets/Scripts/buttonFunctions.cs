@@ -9,6 +9,7 @@ public class buttonFunctions : MonoBehaviour
     public void restart()
     {
         //bad version of restart for time's sake
+        Debug.Log("Clicked Restart");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.stateResume();
     }
