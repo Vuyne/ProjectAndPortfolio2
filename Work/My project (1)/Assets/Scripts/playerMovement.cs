@@ -218,7 +218,6 @@ public class playerMovement : MonoBehaviour, IDamage
             if (move.normalized.magnitude > 0.3 && !isPlayingSteps)
             {
                 StartCoroutine(playStep());
-
             }
             jumpCount = 0;
         }
