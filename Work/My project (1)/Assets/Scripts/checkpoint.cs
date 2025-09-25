@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.VFX;
 
-public class checkpoint : MonoBehaviour
+public class teleporter : MonoBehaviour
 {
 
     [SerializeField] Renderer model;
@@ -18,7 +18,7 @@ public class checkpoint : MonoBehaviour
     {
         if (other.CompareTag("Player") && gameManager.instance.playerSpawnPos.transform.position != transform.position)
         {
-            gameManager.instance.playerScript.spawnPlayer(); //spawn player once it hits checkpoint back to beginning
+            gameManager.instance.playerSpawnPos.transform.position = transform.position; //move spawn pos to this checkpoint
             StartCoroutine(checkpointFeedback());
         }
     }

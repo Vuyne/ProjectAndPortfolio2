@@ -16,7 +16,7 @@ public class ZombieEnemy : EnemyBase
     [SerializeField] int roamPauseTime; //pause between destinations
 
     float roamTimer;
-    float angleToPlayer; 
+    float angleToPlayer;
     float stoppingDistOrig;
 
     Vector3 startingPos;
@@ -33,7 +33,7 @@ public class ZombieEnemy : EnemyBase
     protected override void Update()
     {
 
-        setAnimLocomotion();
+         setAnimLocomotion();
 
         if (agent.remainingDistance < 0.01f)
         {
@@ -51,17 +51,17 @@ public class ZombieEnemy : EnemyBase
         }
 
 
-        //if (playerInTrigger)
-        //{
-        //    canSeePlayer();
-        //}
+        if (playerInTrigger)
+        {
+            canSeePlayer();
+        }
 
     }
 
     //bool canSeePlayer()
     //{
-    //   if (!playerInTrigger || gameManager.instance == null || gameManager.instance.player == null)
-    //       return false;
+    //    if (!playerInTrigger || gameManager.instance == null || gameManager.instance.player == null)
+    //        return false;
 
     //    if (playerInTrigger)
     //    {
@@ -71,16 +71,11 @@ public class ZombieEnemy : EnemyBase
     //    return true;
     //}
 
-   
+
 
     void setAnimLocomotion()
     {
-        //float agentSpeedCurr = agent.velocity.normalized.magnitude;
-        //float animSpeedCurr = anim.GetFloat("Speed");
-
-        // anim.SetFloat("Speed", Mathf.Lerp(animSpeedCurr, agentSpeedCurr, Time.deltaTime * animTransSpeed));
-
-        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
+       anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
     }
 
     void checkRoam()
@@ -140,6 +135,7 @@ public class ZombieEnemy : EnemyBase
 
     void faceTarget()
     {
+
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDirection.x, transform.position.y, playerDirection.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
@@ -155,7 +151,7 @@ public class ZombieEnemy : EnemyBase
 
         if (HP <= 0)
         {
-            gameManager.instance.updateGameGoal(-1);
+           // gameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
     }
