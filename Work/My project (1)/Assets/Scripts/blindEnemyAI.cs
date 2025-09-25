@@ -19,10 +19,10 @@ public class blindEnemyAI : EnemyBase
     [SerializeField] float enemyAttackRange;
 
     float enemyAttackCDOrig;
-    float hearingRadius;
     float hearingLevel;
     float roamTimer;
     float stoppingDistanceOrig;
+    float distanceFromPlayer;
     int HPOrig;
     Vector3 startingPos;
     
@@ -32,7 +32,6 @@ public class blindEnemyAI : EnemyBase
     {
         if(!modelRoot) { modelRoot = transform; }
         enemyAttackCDOrig = enemyAttackCD;
-        hearingRadius = 10f;
         hearingLevel = 5e-7f;
         animator = GetComponent<Animator>();
         startingPos = transform.position;
@@ -76,6 +75,7 @@ public class blindEnemyAI : EnemyBase
         {
             if (hit.collider.CompareTag("Player"))
             {
+                noiseLevel();
                 if (AudioPeer.currentAMP > hearingLevel && playerInTrigger)
                 {
                     enemyAI.SetDestination(gameManager.instance.player.transform.position);
@@ -143,5 +143,12 @@ public class blindEnemyAI : EnemyBase
         NavMeshHit hit;
         NavMesh.SamplePosition(randomPos, out hit, roamDistance, 1);
         enemyAI.SetDestination(hit.position);
+    }
+    void noiseLevel()
+    {
+        float xDistance = gameManager.instance.player.transform.position.x - transform.position.x;
+        float yDistance = gameManager.instance.player.transform.position.x - transform.position.x;
+        distanceFromPlayer = Mathf.Sqrt((xDistance * xDistance) + (yDistance * yDistance));
+        AudioPeer.currentAMP = AudioPeer.currentAMP / distanceFromPlayer;
     }
 }
