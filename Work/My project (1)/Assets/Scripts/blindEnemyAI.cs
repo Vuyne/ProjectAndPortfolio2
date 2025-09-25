@@ -23,6 +23,7 @@ public class blindEnemyAI : EnemyBase
     float roamTimer;
     float stoppingDistanceOrig;
     float distanceFromPlayer;
+    float test;
     int HPOrig;
     Vector3 startingPos;
     
@@ -42,9 +43,10 @@ public class blindEnemyAI : EnemyBase
     protected override void Update()
     {
         animationLocation();
+       test = enemyAI.remainingDistance;
         if (enemyAI.remainingDistance < 0.01f)
             roamTimer += Time.deltaTime;
-        if (playerInTrigger && AudioPeer.currentAMP < hearingLevel)
+        if (playerInTrigger /*&& AudioPeer.currentAMP < hearingLevel*/)
         {
             checkRoam();
         }
@@ -76,7 +78,7 @@ public class blindEnemyAI : EnemyBase
             if (hit.collider.CompareTag("Player"))
             {
                 noiseLevel();
-                if (AudioPeer.currentAMP > hearingLevel && playerInTrigger)
+                if (AudioPeer.currentAMP >= hearingLevel && playerInTrigger)
                 {
                     enemyAI.SetDestination(gameManager.instance.player.transform.position);
                     if (enemyAI.remainingDistance <= enemyAI.stoppingDistance)
@@ -94,12 +96,12 @@ public class blindEnemyAI : EnemyBase
                 }
                 else
                 {
-                    enemyAI.isStopped = true;
+                    //enemyAI.isStopped = true;
                 }
-                enemyAI.isStopped = false;
+                //enemyAI.isStopped = false;
             }
         }
-
+        enemyAI.stoppingDistance = 0;
     }
     public override void takeDamage(int amount)
     {
