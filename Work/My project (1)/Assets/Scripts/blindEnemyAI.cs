@@ -1,3 +1,4 @@
+using NUnit;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -44,9 +45,9 @@ public class blindEnemyAI : EnemyBase
     {
         animationLocation();
        test = enemyAI.remainingDistance;
-        if (enemyAI.remainingDistance < 0.01f)
-            roamTimer += Time.deltaTime;
-        if (playerInTrigger /*&& AudioPeer.currentAMP < hearingLevel*/)
+        if (/*enemyAI.remainingDistance < 0.01f*/ !enemyAI.isStopped)
+            roamTimer += Time.deltaTime / 3;
+        if (playerInTrigger && AudioPeer.currentAMP < hearingLevel)
         {
             checkRoam();
         }
@@ -55,7 +56,6 @@ public class blindEnemyAI : EnemyBase
             checkRoam();
         }
         attackPlayer();
-        
     }
     protected override void OnTriggerEnter(Collider other)
     {
@@ -96,12 +96,11 @@ public class blindEnemyAI : EnemyBase
                 }
                 else
                 {
-                    //enemyAI.isStopped = true;
+                    enemyAI.isStopped = true;
                 }
-                //enemyAI.isStopped = false;
+                enemyAI.isStopped = false;
             }
         }
-        enemyAI.stoppingDistance = 0;
     }
     public override void takeDamage(int amount)
     {
@@ -131,7 +130,7 @@ public class blindEnemyAI : EnemyBase
     }
     void checkRoam()
     {
-        if (roamTimer >= roamPauseTimer && enemyAI.remainingDistance < 0.01f)
+        if (roamTimer >= roamPauseTimer && /*enemyAI.remainingDistance < 0.01f*/ !enemyAI.isStopped)
         {
             roam();
         }
