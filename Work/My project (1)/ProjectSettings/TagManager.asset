@@ -11,6 +11,7 @@ TagManager:
   - SpecialAnchor
   - Player Spawn Pos
   - Arrow
+  - Player Spawn Pos2
   layers:
   - Default
   - TransparentFX
