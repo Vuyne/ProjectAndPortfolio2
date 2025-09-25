@@ -15,13 +15,16 @@ public class gameManager : MonoBehaviour
     public TMP_Text ammoCur, ammoMax;
 
     public GameObject checkpointPopup;//checpoint
+    public GameObject Teleporterpopup;//teleporter
     public Image playerHPBar;
     public GameObject playerDamageFlash;
     public GameObject player;
     public playerMovement playerScript;
     public RJPlayerController playerScript1;
 
-    public GameObject playerSpawnPos;
+    public GameObject playerSpawnPos; //checkpoint
+    public GameObject playerSpawnPos2; //teleport
+
 
     public bool isPaused;
 
@@ -42,7 +45,9 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerMovement>();
         playerScript1 = player.GetComponent<RJPlayerController>();
 
-        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos"); //respawn
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos"); //checkpoint
+        playerSpawnPos2 = GameObject.FindWithTag("Player Spawn Pos2"); //teleport
+
     }
 
     // Update is called once per frame
