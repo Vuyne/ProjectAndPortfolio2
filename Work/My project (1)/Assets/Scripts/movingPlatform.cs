@@ -3,15 +3,26 @@ using UnityEngine;
 public class movingPlatform : MonoBehaviour
 {
     [SerializeField] Rigidbody player;
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        player = other.GetComponent<Rigidbody>();
+        if (player.CompareTag("Player"))
+        {
             player.transform.parent = transform;
-        
+            player.isKinematic = true;
+        }
+        //if (player.transform.parent != null)
+        //{
+        //    player.isKinematic = false;
+        //}
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        player = other.GetComponent<Rigidbody>();
+        if (player.CompareTag("Player"))
+        {
             player.transform.parent = null;
+            player.isKinematic = false;
+        }
     }
 }
