@@ -21719,9 +21719,10 @@ GameObject:
   - component: {fileID: 523199669900548466}
   - component: {fileID: 2194220286197139917}
   - component: {fileID: 2077777317900314647}
+  - component: {fileID: 7090451348624415730}
   - component: {fileID: 5639712282064667284}
   m_Layer: 0
-  m_Name: platform (14)
+  m_Name: movingplatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21819,6 +21820,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7090451348624415730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8960386299226874547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b8bd4756ce7654409abf4105b733de0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::movingPlatform
+  player: {fileID: 0}
 --- !u!95 &5639712282064667284
 Animator:
   serializedVersion: 7
