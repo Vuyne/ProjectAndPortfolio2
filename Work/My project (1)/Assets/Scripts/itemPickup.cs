@@ -14,17 +14,21 @@ public class KeyPickup : MonoBehaviour
         {
             // Add key to player's inventory
             playerInv.AddKey(keyID);
-          StartCoroutine(KeyPopUp());
-            
+
+
             Debug.Log($"Picked up key: {keyID}");
+            StartCoroutine(KeyPopUp());
             // Remove key object from the scene
-            Destroy(gameObject);
+          
+        
         }
+       
     }
      IEnumerator KeyPopUp()
     {
         gameManager.instance.keyMenu.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         gameManager.instance.keyMenu.SetActive(false);
+        Destroy(gameObject);
     }
 }

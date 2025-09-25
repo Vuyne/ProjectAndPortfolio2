@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,6 +28,7 @@ public class keyTerminal : MonoBehaviour
         if (playerInRange && Input.GetButtonDown("Interact"))
         {
             DepositAllKeys();
+            StartCoroutine(KeyDeposit());
         }
 
         UpdateIndicators();
@@ -105,5 +107,12 @@ public class keyTerminal : MonoBehaviour
     public bool HasKey(item keyID)
     {
         return terminalInventory.HasKey(keyID);
+    }
+    IEnumerator KeyDeposit()
+    {
+        gameManager.instance.keyDeposit.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        gameManager.instance.keyDeposit.SetActive(false);
+       
     }
 }
